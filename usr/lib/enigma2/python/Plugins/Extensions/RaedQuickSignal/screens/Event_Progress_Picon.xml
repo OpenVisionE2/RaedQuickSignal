@@ -1,0 +1,218 @@
+<screen name="Event_Progress_Picon" position="210,130" size="800,470" title="Quick Signal Info" zPosition="1">
+  <widget source="session.FrontendStatus" render="Label" position="284,0" zPosition="2" size="200,35" font="Regular; 30" foregroundColor="#00bbbbbb" halign="center" valign="center" transparent="1">
+    <convert type="FrontendInfo">SNRdB</convert>
+  </widget>
+  <!-- SNR -->
+  <eLabel name="snr" text="SNR:" position="0,45" size="80,35" font="Regular; 25" halign="center" foregroundColor="#00bbbbbb" transparent="1" />
+  <widget source="session.FrontendStatus" render="Progress" position="85,40" size="600,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_snr-scan.png" zPosition="2" borderWidth="4" borderColor="#656565">
+    <convert type="FrontendInfo">SNR</convert>
+  </widget>
+  <widget source="session.FrontendStatus" render="Label" position="690,45" size="110,35" font="Regular; 25" foregroundColor="#00bbbbbb" transparent="1">
+    <convert type="FrontendInfo">SNR</convert>
+  </widget>
+  <!-- Progressbar (current event duration) -->
+  <widget source="session.Event_Now" render="Progress" position="85,105" size="600,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/images/progress.png" zPosition="2" borderWidth="4" borderColor="#656565" >
+    <convert type="EventTime">Progress</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Label" position="88,105" size="600,50" font="Regular;30" valign="center"  backgroundColor="#000000" transparent="1" zPosition="3">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <eLabel position="85,160" size="600,2" backgroundColor="#00bbbbbb" zPosition="4" />
+  <eLabel position="85,310" size="600,2" backgroundColor="#00bbbbbb" zPosition="4" />
+  <eLabel position="85,337" size="600,2" backgroundColor="#00bbbbbb" zPosition="4" />
+  <eLabel position="85,368" size="600,2" backgroundColor="#00bbbbbb" zPosition="4" />
+  <eLabel position="85,397" size="600,2" backgroundColor="#00bbbbbb" zPosition="4" />
+  <widget source="session.CurrentService" render="Label" position="85,163" size="600,150" font="Regular; 20" zPosition="2" backgroundColor="background" foregroundColor="#41ff9900" transparent="1" valign="top" noWrap="1" halign="center">
+    <convert type="RaedQuickEcmInfo">ecmfile</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="85,311" size="600,25" font="Regular; 20" zPosition="2" backgroundColor="background" foregroundColor="#00bbbbbb" transparent="1" valign="top" halign="center">
+    <convert type="RaedQuickEcmInfo">caids</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="656,311" size="80,25" font="Regular; 22" zPosition="3" backgroundColor="background" foregroundColor="#fec000" transparent="1" valign="top" halign="center">
+    <convert type="RaedQuickEcmInfo">activecaid</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="85,340" size="600,25" font="Regular; 20" zPosition="2" backgroundColor="background" foregroundColor="#41ff9900" transparent="1" valign="top" halign="center">
+    <convert type="RaedQuickEcmInfo">pids</convert>
+  </widget>
+  <!--widget source="session.CurrentService" render="Label" position="85,373" size="600,25" font="Regular; 20" zPosition="2" backgroundColor="background" foregroundColor="#00bbbbbb" transparent="1" valign="top" halign="center">
+    <convert type="RaedQuickEcmInfo">bitrate</convert>
+  </widget-->
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="4,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">1,10</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="8,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">11,20</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="12,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">21,30</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="16,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">31,40</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="20,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">41,50</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="25,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">51,60</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="30,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">61,70</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="35,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">71,80</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="40,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">81,90</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="45,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">91,100</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="50,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">101,200</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="55,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">201,300</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="60,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">301,400</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="65,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">401,500</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="70,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">501,600</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="75,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">601,700</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="80,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">701,800</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="85,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">801,900</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="90,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">901,1000</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="95,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">1001,5000</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="100,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">5001,10000</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="150,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">9001,10000</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="200,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">10001,50000</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="250,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">50001,100001</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="400,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">100001,150000</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="550,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">150001,200000</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="580,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">200001,250000</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="620,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">250001,319999</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="650,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
+    <convert type="RaedQuickSignalText">BerNum</convert>
+    <convert type="ValueRange">320000,320000</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <ePixmap position = "740,340" size = "45,30" zPosition = "4" alphatest = "blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/images/menu.png" />
+  <!-- Picon -->
+  <ePixmap position="185,402" size="100,60" zPosition="5" transparent="1" alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/picon_fon.png" />
+  <widget source="session.CurrentService" render="RaedQuickSignalPiconUni" path="picon" position="185,402" size="100,60" zPosition="3" alphatest="on">
+    <convert type="RaedQuickServName2">Reference</convert>
+  </widget>
+  <ePixmap position="288,402" size="100,60" zPosition="5" transparent="1" alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/picon_fon.png" />
+  <widget source="session.CurrentService" render="RaedQuickSignalPiconUni" path="piconProv" position="288,402" size="100,60" zPosition="3" alphatest="on">
+    <convert type="RaedQuickServName2">Provider</convert>
+  </widget>
+  <ePixmap position="390,402" size="100,60" zPosition="5" transparent="1" alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/picon_fon.png" />
+  <widget source="session.CurrentService" render="RaedQuickSignalPiconUni" path="piconSat" position="390,402" size="100,60" zPosition="3" alphatest="on">
+    <convert type="RaedQuickServName2">OrbitalPos</convert>
+  </widget>
+  <ePixmap position="495,402" size="100,60" zPosition="5" transparent="1" alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/picon_fon.png" />
+  <widget source="session.CurrentService" render="RaedQuickSignalPicEmuF" path="RaedQuickSignal/emu" position="495,402" size="100,60" transparent="1" alphatest="blend" zPosition="3" />
+  <!-- Channel and mumber and Provider -->
+  <widget source="session.CurrentService" render="Label" position="0,400" size="180,22" font="Regular; 18" backgroundColor="background" foregroundColor="#0000ff00" transparent="1" halign="center">
+    <convert type="RaedQuickServName2">Number</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="0,420" size="180,22" font="Regular; 16" backgroundColor="background" foregroundColor="#ff0000" transparent="1" halign="center">
+    <convert type="RaedQuickServName2">Name</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="0,443" size="180,22" font="Regular; 16" backgroundColor="background" foregroundColor="#00bbbbbb" transparent="1" halign="center">
+    <convert type="RaedQuickServName2">Provider</convert>
+  </widget>
+  <!-- Tuner Info  -->
+  <widget source="session.CurrentService" render="Label" position="599,403" size="200,25" font="Regular; 20" halign="center" backgroundColor="background" foregroundColor="#fec000" transparent="1">
+    <convert type="RaedQuickServName2">%F %p %Y %f %M %s</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="599,435" size="200,23" font="Regular; 18" halign="center" backgroundColor="background" foregroundColor="#00bbbbbb" transparent="1">
+    <convert type="RaedQuickServName2">%c %l %h %m %g %b %e %S</convert>
+  </widget>
+</screen>

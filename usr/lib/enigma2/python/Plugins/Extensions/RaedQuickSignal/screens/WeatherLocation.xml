@@ -1,0 +1,10 @@
+<screen name="WeatherLocationChoiceList" position="center,center" size="1280,720" title="Location list" >
+			<widget source="Title" render="Label" position="70,47" size="950,43" font="Regular;35" transparent="1" />
+			<widget name="choicelist" position="70,115" size="700,480" scrollbarMode="showOnDemand" scrollbarWidth="6" transparent="1" />
+			<eLabel position=" 55,675" size="290, 5" zPosition="-10" backgroundColor="red" />
+			<eLabel position="350,675" size="290, 5" zPosition="-10" backgroundColor="green" />
+			<eLabel position="645,675" size="290, 5" zPosition="-10" backgroundColor="yellow" />
+			<eLabel position="940,675" size="290, 5" zPosition="-10" backgroundColor="blue" />
+			<widget name="key_red" position="70,635" size="260,25" zPosition="1" font="Regular;20" halign="left" foregroundColor="foreground" transparent="1" />
+			<widget name="key_green" position="365,635" size="260,25" zPosition="1" font="Regular;20" halign="left" foregroundColor="foreground" transparent="1" />
+		</screen>
