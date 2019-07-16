@@ -1,25 +1,16 @@
 from Renderer import Renderer
 from enigma import ePixmap, eServiceCenter, eServiceReference
-from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
+from Tools.Directories import fileExists
 #from Tools.Alternatives import GetWithAlternative
 from Components.config import config
-try:
-    from Components.Converter.Poll import PollConverter as Poll
-    dreamos=True
-except:
-    from Components.Converter.Poll import Poll
-    dreamos=False
+from Components.Converter.Poll import Poll
 
 class RaedQuickPiconWeather(Renderer, Poll):
     searchPaths = ('/usr/share/enigma2/%s/', '/usr/lib/enigma2/python/Plugins/Extensions/%s/')
 
     def __init__(self):
         Renderer.__init__(self)
-        if dreamos:
-           Poll.__init__(self,type)
-        else:
-           Poll.__init__(self)
-        
+        Poll.__init__(self)
         self.path = 'picon'
         self.size = None
         self.nameCache = {}

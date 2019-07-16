@@ -1,33 +1,22 @@
 #Coders by Nikolasi
 #EDit BY RAED To QuickSignal 2018
-from Tools.Directories import fileExists
-from Tools.LoadPixmap import LoadPixmap 
 from Components.Pixmap import Pixmap 
 from Renderer import Renderer
-from enigma import getDesktop, eServiceCenter, eServiceReference, iServiceInformation, iPlayableService, eDVBFrontendParametersSatellite, eDVBFrontendParametersCable 
+from enigma import getDesktop, iServiceInformation 
 from string import upper 
-from enigma import ePixmap, eTimer 
+from enigma import ePixmap 
 from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename 
 from Components.config import config
 from Components.Element import cached
 import os
-
-try:
-    from Components.Converter.Poll import PollConverter as Poll
-    dreamos=True
-except:
-    from Components.Converter.Poll import Poll
-    dreamos=False
+from Components.Converter.Poll import Poll
 
 class RaedQuickSignalPicEmuF(Renderer, Poll):
         __module__ = __name__
         searchPaths = ('/usr/share/enigma2/%s/', '/usr/lib/enigma2/python/Plugins/Extensions/%s/', '/media/sde1/%s/', '/media/cf/%s/', '/media/sdd1/%s/', '/media/usb/%s/', '/media/ba/%s/', '/mnt/ba/%s/', '/media/sda/%s/', '/etc/%s/')
         
         def __init__(self):
-		if dreamos:
-		   Poll.__init__(self,type)
-		else:
-                   Poll.__init__(self)
+                Poll.__init__(self)
                 Renderer.__init__(self)
                 if getDesktop(0).size().width() == 1920:
                       self.path = 'emu2'

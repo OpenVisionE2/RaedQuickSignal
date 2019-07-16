@@ -3,13 +3,11 @@
 ## Coded by Sirius
 ## version 0.7
 
-from Tools.Directories import fileExists, pathExists
+from Tools.Directories import fileExists
 from Components.Converter.Converter import Converter
 from Components.Element import cached
-from Components.config import config, configfile
+from Components.config import config
 from Components.Console import Console as iConsole
-from Components.Language import language
-from os import environ
 from Poll import Poll
 import gettext
 import time

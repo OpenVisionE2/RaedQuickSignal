@@ -5,9 +5,8 @@
 
 from Poll import Poll
 from Components.Converter.Converter import Converter
-from enigma import eTimer, iPlayableService, iServiceInformation, eServiceReference, iServiceKeys, getDesktop
-from Components.ConfigList import ConfigListScreen
-from Components.config import config, getConfigListEntry, ConfigText, ConfigPassword, ConfigClock, ConfigSelection, ConfigSubsection, ConfigYesNo, configfile, NoSave
+from enigma import eTimer, iPlayableService, iServiceInformation
+from Components.config import config
 from Components.Element import cached
 from Tools.Directories import fileExists
 import os

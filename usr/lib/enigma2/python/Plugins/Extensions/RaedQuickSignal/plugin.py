@@ -22,7 +22,6 @@ from Components.Label import Label
 from Screens.Screen import Screen
 from Tools.Directories import *
 from Components.config import *
-from os import environ
 import datetime
 import os
 import re

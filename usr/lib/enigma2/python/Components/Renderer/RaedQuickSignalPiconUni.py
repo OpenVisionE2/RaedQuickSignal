@@ -27,20 +27,13 @@
 # 02.07.2014 small fix reference
 # 09.01.2015 redesign code
 # 17.08.2018 Update by mfraja to RAEDQuickSignal plugins
-# 07.12.2018 Update by mfraja to RAEDQuickSignal plugins fix picon show on DreamOS
 
 from Renderer import Renderer 
 from enigma import ePixmap, ePicLoad
 from Components.AVSwitch import AVSwitch
 from Tools.Directories import SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS, resolveFilename 
 import os
-
-try:
-    from Components.Converter.Poll import PollConverter as Poll
-    dreamos=True
-except:
-    from Components.Converter.Poll import Poll
-    dreamos=False
+from Components.Converter.Poll import Poll
 
 searchPaths = []
 
@@ -58,10 +51,7 @@ class RaedQuickSignalPiconUni(Renderer, Poll):
 	__module__ = __name__
 	def __init__(self):
 		Renderer.__init__(self)
-		if dreamos:
-		   Poll.__init__(self,type)
-		else:
-                   Poll.__init__(self)
+		Poll.__init__(self)
 		self.path = 'piconUni'
 		self.scale = '0'
 		self.nameCache = {}
