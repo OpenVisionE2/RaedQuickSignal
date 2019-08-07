@@ -29,7 +29,7 @@ import re
 ## Move locale code to __init__.py files
 #import gettext
 
-Ver = "4.8"
+Ver = "4.9"
 now = datetime.datetime.now()
 datetime_now = (now.strftime("%Y-%m-%d  %H:%M"))
 lang = language.getLanguage()
@@ -83,6 +83,8 @@ if getDesktop(0).size().width() == 1280:
         SKIN_Event_Progress_Picon = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Picon.xml"
         SKIN_Event_Progress_Event_Des = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Event_Des.xml"
         SKIN_Event_Progress_Weather = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Weather.xml"
+	SKIN_AGC_Picon_media = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/AGC_Picon_media.xml"
+        SKIN_Event_Progress_Picon_media = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Picon_media.xml"
 else:
         Space = "                                          "
         SKIN_setup = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Setup_FHD.xml"
@@ -93,10 +95,11 @@ else:
         SKIN_Event_Progress_Picon = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Picon_FHD.xml"
         SKIN_Event_Progress_Event_Des = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Event_Des_FHD.xml"
         SKIN_Event_Progress_Weather = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Weather_FHD.xml"
+	SKIN_AGC_Picon_media = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/AGC_Picon_media_FHD.xml"
+        SKIN_Event_Progress_Picon_media = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Picon_media_FHD.xml"
 ##############################################################################
 config.plugins.RaedQuickSignal = ConfigSubsection()
 config.plugins.RaedQuickSignal.enabled = ConfigYesNo(default=True)
-#config.plugins.RaedQuickSignal.shown = ConfigYesNo(default=False)
 config.plugins.RaedQuickSignal.keyname = ConfigSelection(default = "KEY_TEXT", choices = [
                 ("KEY_TEXT", "TEXT"),
                 ("KEY_TV", "TV"),
@@ -121,6 +124,10 @@ config.plugins.RaedQuickSignal.style = ConfigSelection(default = "AGC1", choices
                 ("Event1", "Event Progress + Picon"),
                 ("Event2", "Event Progress + Event Description"),
                 ("Event3", "Event Progress + Weather"),
+                ])
+config.plugins.RaedQuickSignal.piconpath = ConfigSelection(default = "PLUGIN", choices = [
+                ("PLUGIN", "Set Picon Path from Plugin"),
+                ("MEDIA", "Set Picon Path from /media"),
                 ])
 config.plugins.RaedQuickSignal.refreshInterval = ConfigNumber(default=30) #in minutes
 ##############################################################################
@@ -290,9 +297,14 @@ class RaedQuickSignalScreen(Screen):
                 Screen.__init__(self, session)
                 dellog()
                 if config.plugins.RaedQuickSignal.style.value == "AGC1":
-                        with open(SKIN_AGC_Picon, 'r') as f:
-                             self.skin = f.read()
-                             f.close()
+                        if config.plugins.RaedQuickSignal.piconpath.value == "PLUGIN":
+                             with open(SKIN_AGC_Picon, 'r') as f:
+                                  self.skin = f.read()
+                                  f.close()
+                        elif config.plugins.RaedQuickSignal.piconpath.value == "MEDIA":
+                             with open(SKIN_AGC_Picon_media, 'r') as f:
+                                  self.skin = f.read()
+                                  f.close()
                 elif config.plugins.RaedQuickSignal.style.value == "AGC2":
                         with open(SKIN_AGC_Event_Des, 'r') as f:
                              self.skin = f.read()
@@ -302,9 +314,14 @@ class RaedQuickSignalScreen(Screen):
                              self.skin = f.read()
                              f.close()
                 elif config.plugins.RaedQuickSignal.style.value == "Event1":
-                        with open(SKIN_Event_Progress_Picon, 'r') as f:
-                             self.skin = f.read()
-                             f.close()
+                        if config.plugins.RaedQuickSignal.piconpath.value == "PLUGIN":
+                             with open(SKIN_Event_Progress_Picon, 'r') as f:
+                                  self.skin = f.read()
+                                  f.close()
+                        elif config.plugins.RaedQuickSignal.piconpath.value == "MEDIA":
+                             with open(SKIN_Event_Progress_Picon_media, 'r') as f:
+                                  self.skin = f.read()
+                                  f.close()
                 elif config.plugins.RaedQuickSignal.style.value == "Event2":
                         with open(SKIN_Event_Progress_Event_Des, 'r') as f:
                              self.skin = f.read()
@@ -346,7 +363,7 @@ class RaedQuickSignal():
                 self.session = session
                 self.qsignal=None
                 if os.path.exists("/tmp/.qsignal"):
-                                  os.remove("/tmp/.qsignal")
+                       os.remove("/tmp/.qsignal")
                 keymap = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/keymap.xml"
                 global globalActionMap
                 readKeymap(keymap)
@@ -398,6 +415,7 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
                 self.currkeyname_value=config.plugins.RaedQuickSignal.keyname.value
                 self.list.append(getConfigListEntry(_("Enable Plugin"), config.plugins.RaedQuickSignal.enabled))
                 self.list.append(getConfigListEntry(_("Select key to show RaedQuickSignal"), config.plugins.RaedQuickSignal.keyname))
+		self.list.append(getConfigListEntry(_("Select Path Of Picons Prov/Sat"), config.plugins.RaedQuickSignal.piconpath))
                 self.list.append(getConfigListEntry(_("Select Style of Plugin"), config.plugins.RaedQuickSignal.style))
                 self.list.append(getConfigListEntry(_("Refresh interval in minutes:"), config.plugins.RaedQuickSignal.refreshInterval))
                 self.list.append(getConfigListEntry(_("Temperature unit:"), config.plugins.TSweather.degreetype))
