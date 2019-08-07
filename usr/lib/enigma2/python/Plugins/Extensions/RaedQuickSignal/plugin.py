@@ -29,7 +29,7 @@ import re
 ## Move locale code to __init__.py files
 #import gettext
 
-Ver = "4.9"
+Ver = "5.0"
 now = datetime.datetime.now()
 datetime_now = (now.strftime("%Y-%m-%d  %H:%M"))
 lang = language.getLanguage()

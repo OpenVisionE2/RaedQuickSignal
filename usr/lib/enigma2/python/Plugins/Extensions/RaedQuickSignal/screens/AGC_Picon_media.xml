@@ -198,7 +198,7 @@
     <convert type="RaedQuickServName2">OrbitalPos</convert>
   </widget>
   <ePixmap position="495,402" size="100,60" zPosition="5" transparent="1" alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/picon_fon.png" />
-  <widget source="session.CurrentService" render="RaedQuickSignalPicEmuF" path="RaedQuickSignal/emu" position="495,402" size="100,60" transparent="1" alphatest="blend" zPosition="3" />
+  <widget source="session.CurrentService" render="RaedQuickSignalPicEmuF" path="emu" position="495,402" size="100,60" transparent="1" alphatest="blend" zPosition="3" />
   <!-- Channel and mumber and Provider -->
   <widget source="session.CurrentService" render="Label" position="0,400" size="180,22" font="Regular; 18" backgroundColor="background" foregroundColor="#0000ff00" transparent="1" halign="center">
     <convert type="RaedQuickServName2">Number</convert>
