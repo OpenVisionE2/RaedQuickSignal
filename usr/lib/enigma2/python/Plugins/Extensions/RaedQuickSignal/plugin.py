@@ -1,6 +1,5 @@
 #RAEDQuickSignal (c) RAED 07-02-2014
 #Thank's mfaraj to help with some codes
-#Based on 2boom & big-town quick signal Plugins
 
 from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigSubsection, ConfigYesNo, configfile, NoSave
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
@@ -26,25 +25,10 @@ import datetime
 import os
 import re
 
-## Move locale code to __init__.py files
-#import gettext
-
-Ver = "5.0"
+Ver = "5.1"
 now = datetime.datetime.now()
 datetime_now = (now.strftime("%Y-%m-%d  %H:%M"))
 lang = language.getLanguage()
-
-## Move locale code to __init__.py files
-#environ["LANGUAGE"] = lang[:2]
-#gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-#gettext.textdomain("enigma2")
-#gettext.bindtextdomain("RaedQuickSignal", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/RaedQuickSignal/locale/"))
-
-#def _(txt):
-#        t = gettext.dgettext("RaedQuickSignal", txt)
-#        if t == txt:
-#                t = gettext.gettext(txt)
-#        return t
 
 def trace_error():
     import sys
@@ -249,7 +233,6 @@ class WeatherLocationChoiceList(Screen):
                        return True
                 except:
                        return False
-		#self.iConsole.ePopen("wget -P /tmp -T2 'http://weather.service.msn.com/data.aspx?weadegreetype=%s&culture=%s&weasearchstr=%s&src=outlook' -O /tmp/weathermsn.xml" % (degreetype, weather_location, weather_city), self.control_xml)
 
         def add_city(self):
                  self.session.openWithCallback(self.cityCallback, InputBox, title=_("Please enter a name of the city"), text="cityname", maxSize=False, visible_width =250)
@@ -331,8 +314,15 @@ class RaedQuickSignalScreen(Screen):
                              self.skin = f.read()
                              f.close()
                 self.session=session
-                self["setupActions"] = ActionMap(["SetupActions",'MenuActions'],
-                                {"cancel": self.exit,'menu':self.showsetup}, -2)
+                self["setupActions"] = ActionMap(["WizardActions", "SetupActions", "MenuActions"],
+                    {
+                         "cancel": self.exit,
+                         "menu":self.showsetup,
+                         "up": self.keyUp,
+                         "down": self.keyDown,
+                         "left": self.keyLeft,
+                         "right": self.keyRight,
+                    })
                 shown=True
                 self.onLayoutFinish.append(self.layoutFinished)
 
@@ -341,6 +331,20 @@ class RaedQuickSignalScreen(Screen):
                 self.setTitle("QuickSignal by RAED V" + str(Ver + Space + datetime_now))
                 cfile=open("/tmp/.qsignal","w")
                 cfile.close()
+
+	def keyLeft(self):
+		self.servicelist.moveUp()
+		self.servicelist.zap()
+
+	def keyRight(self):
+		self.servicelist.moveDown()
+		self.servicelist.zap()
+
+	def keyUp(self):
+               self.session.execDialog(self.servicelist)
+
+	def keyDown(self):
+		self.session.execDialog(self.servicelist)
 
         def exit(self):
                 if os.path.exists("/tmp/.qsignal"):
