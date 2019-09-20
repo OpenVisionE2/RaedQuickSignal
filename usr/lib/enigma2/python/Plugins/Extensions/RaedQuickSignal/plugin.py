@@ -1,8 +1,10 @@
 #RAEDQuickSignal (c) RAED 07-02-2014
 #Thank's mfaraj to help with some codes
 
+from Components.ActionMap import ActionMap
 from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigSubsection, ConfigYesNo, configfile, NoSave
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
+from Screens.ChannelSelection import ChannelSelection
 from Components.Sources.StaticText import StaticText
 from Components.ConfigList import ConfigListScreen
 from Components.Console import Console as iConsole
@@ -25,7 +27,7 @@ import datetime
 import os
 import re
 
-Ver = "5.1"
+Ver = "5.2"
 now = datetime.datetime.now()
 datetime_now = (now.strftime("%Y-%m-%d  %H:%M"))
 lang = language.getLanguage()
@@ -314,6 +316,19 @@ class RaedQuickSignalScreen(Screen):
                              self.skin = f.read()
                              f.close()
                 self.session=session
+                self.startupservice = config.servicelist.startupservice.value
+                logdata('self.startupservice', self.startupservice)
+                sref = self.session.nav.getCurrentService()
+                from ServiceReference import ServiceReference
+                p = ServiceReference(str(sref))
+                servicename = str(p.getServiceName())
+                serviceurl = p.getPath()
+                logdata('serviceurl', serviceurl)
+                logdata('servicename', servicename)
+                logdata('playeble-sref', sref)
+                config.servicelist.startupservice.value = serviceurl
+                config.servicelist.startupservice.save()
+                self.servicelist = self.session.instantiateDialog(ChannelSelection)
                 self["setupActions"] = ActionMap(["WizardActions", "SetupActions", "MenuActions"],
                     {
                          "cancel": self.exit,
@@ -341,7 +356,7 @@ class RaedQuickSignalScreen(Screen):
 		self.servicelist.zap()
 
 	def keyUp(self):
-               self.session.execDialog(self.servicelist)
+		self.session.execDialog(self.servicelist)
 
 	def keyDown(self):
 		self.session.execDialog(self.servicelist)
@@ -349,10 +364,11 @@ class RaedQuickSignalScreen(Screen):
         def exit(self):
                 if os.path.exists("/tmp/.qsignal"):
                         os.remove("/tmp/.qsignal")
+                config.servicelist.startupservice.value = self.startupservice
+                config.servicelist.startupservice.save()
                 self.close()
 
         def setupback(self,answer=False):
-                
                 if answer:
                         self.exit()
                         
