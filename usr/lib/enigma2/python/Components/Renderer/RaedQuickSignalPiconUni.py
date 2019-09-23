@@ -31,7 +31,7 @@
 from Renderer import Renderer 
 from enigma import ePixmap, ePicLoad
 from Components.AVSwitch import AVSwitch
-from Tools.Directories import SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS, resolveFilename 
+from Tools.Directories import SCOPE_CURRENT_SKIN, SCOPE_PLUGINS, resolveFilename 
 import os
 from Components.Converter.Poll import Poll
 
@@ -99,8 +99,6 @@ class RaedQuickSignalPiconUni(Renderer, Poll):
 						tmp = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
 						if os.path.isfile(tmp):
 							pngname = tmp
-						else:
-							pngname = resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/picon_default.png')
 					self.nameCache['default'] = pngname
 
 			print "raedpngnameself.pngname",str(pngname),"**",self.pngname	
