@@ -56,7 +56,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                 if not info:
                         return ""
                 # Alternative SoftCam Manager 
-                if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/AlternativeSoftCamManager/plugin.py")): 
+                if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/AlternativeSoftCamManager/plugin.pyo")): 
                         if config.plugins.AltSoftcam.actcam.value != "none": 
                                 return config.plugins.AltSoftcam.actcam.value 
                         else: 
