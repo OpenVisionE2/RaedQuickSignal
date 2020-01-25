@@ -8,7 +8,7 @@ from Components.Converter.Converter import Converter
 from enigma import eTimer, iPlayableService, iServiceInformation
 from Components.config import config
 from Components.Element import cached
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_LIBDIR
 import os
 try:
 	from bitratecalc import eBitrateCalculator

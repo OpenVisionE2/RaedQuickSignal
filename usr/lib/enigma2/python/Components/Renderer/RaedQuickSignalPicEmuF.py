@@ -5,7 +5,7 @@ from Renderer import Renderer
 from enigma import getDesktop, iServiceInformation 
 from string import upper 
 from enigma import ePixmap 
-from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, resolveFilename, SCOPE_PLUGINS, SCOPE_LIBDIR
 from Components.config import config
 from Components.Element import cached
 import os
