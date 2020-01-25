@@ -5,7 +5,7 @@ from Renderer import Renderer
 from enigma import getDesktop, iServiceInformation 
 from string import upper 
 from enigma import ePixmap 
-from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, resolveFilename 
+from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, resolveFilename, SCOPE_PLUGINS
 from Components.config import config
 from Components.Element import cached
 import os
@@ -13,7 +13,8 @@ from Components.Converter.Poll import Poll
 
 class RaedQuickSignalPicEmuF(Renderer, Poll):
         __module__ = __name__
-        searchPaths = ('/usr/share/enigma2/%s/', '/usr/lib/enigma2/python/Plugins/Extensions/%s/', '/media/sde1/%s/', '/media/cf/%s/', '/media/sdd1/%s/', '/media/usb/%s/', '/media/ba/%s/', '/mnt/ba/%s/', '/media/sda/%s/', '/etc/%s/')
+        searchPaths = ('/usr/share/enigma2/%s/', '/media/sde1/%s/', '/media/cf/%s/', '/media/sdd1/%s/', '/media/usb/%s/', '/media/ba/%s/', '/mnt/ba/%s/', '/media/sda/%s/', '/etc/%s/')
+	searchPaths.append(resolveFilename(SCOPE_PLUGINS, 'Extensions/%s/'))
         
         def __init__(self):
                 Poll.__init__(self)
@@ -55,7 +56,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                 if not info:
                         return ""
                 # Alternative SoftCam Manager 
-                if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/plugin.py"): 
+                if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/AlternativeSoftCamManager/plugin.py")): 
                         if config.plugins.AltSoftcam.actcam.value != "none": 
                                 return config.plugins.AltSoftcam.actcam.value 
                         else: 
@@ -104,7 +105,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                         if config.plugins.emuman.cam.value: 
                                 return config.plugins.emuman.cam.value
                 #PKT
-                elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/PKT/plugin.pyo"):
+                elif fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/PKT/plugin.pyo")):
                         if config.plugins.emuman.cam.value: 
                                 return config.plugins.emuman.cam.value
                 #HDMU
@@ -158,7 +159,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                         except:
                                 return None
                 #Newnigma2 OE2.0
-                elif fileExists("/usr/lib/enigma2/python/Plugins/newnigma2/eCamdCtrl/eCamdctrl.pyo"):
+                elif fileExists(resolveFilename(SCOPE_LIBDIR, "enigma2/python/Plugins/newnigma2/eCamdCtrl/eCamdctrl.pyo")):
                         try:
                           from Plugins.newnigma2.eCamdCtrl.eCamdctrl import runningcamd
                           if config.plugins.camdname.skin.value: 
@@ -166,12 +167,12 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                         except: 
                                 return None
                 #Newnigma2 OE2.5
-                elif fileExists("/usr/lib/enigma2/python/Plugins/newnigma2/camdctrl/camdctrl.pyo"):
+                elif fileExists(resolveFilename(SCOPE_LIBDIR, "enigma2/python/Plugins/newnigma2/camdctrl/camdctrl.pyo")):
                         if config.plugins.camdname.skin.value:
                             return config.usage.emu_name.value
                         return None
                 # GP3
-                elif fileExists("/usr/lib/enigma2/python/Plugins/Bp/geminimain/lib/libgeminimain.so"):
+                elif fileExists(resolveFilename(SCOPE_LIBDIR, "enigma2/python/Plugins/Bp/geminimain/lib/libgeminimain.so")):
                         try:
                                 from Plugins.Bp.geminimain.plugin import GETCAMDLIST
                                 from Plugins.Bp.geminimain.lib import libgeminimain
@@ -184,13 +185,13 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                         except:
                                 return None
                 # GP4
-                elif fileExists("/usr/lib/enigma2/python/Plugins/GP4/geminicamswitch/gscamtools.so"):
+                elif fileExists(resolveFilename(SCOPE_LIBDIR, "enigma2/python/Plugins/GP4/geminicamswitch/gscamtools.so")):
                                 from Plugins.GP4.geminicamswitch.gscamtools import readjsons
                                 if config.gcammanager.currentbinary.value: 
                                         return config.gcammanager.currentbinary.value
                                 return None
                 # Dream Elite 
-                elif fileExists("/usr/lib/enigma2/python/DE/DEPanel.so"):
+                elif fileExists(resolveFilename(SCOPE_LIBDIR, "enigma2/python/DE/DEPanel.so")):
                         try:
                                 from DE.DELibrary import Tool
                                 t = Tool()
