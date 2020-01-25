@@ -8,7 +8,7 @@ from Components.Converter.Converter import Converter
 from enigma import eTimer, iPlayableService, iServiceInformation
 from Components.config import config
 from Components.Element import cached
-from Tools.Directories import fileExists
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 import os
 try:
 	from bitratecalc import eBitrateCalculator
@@ -247,7 +247,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 			nameemu = []
 			nameser = []
 			# Alternative SoftCam Manager 
-			if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/plugin.py"): 
+			if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/AlternativeSoftCamManager/plugin.py")): 
 				if config.plugins.AltSoftcam.actcam.value != "none": 
 					return config.plugins.AltSoftcam.actcam.value 
 				else: 
@@ -265,7 +265,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 				if config.plugins.emuman.cam.value: 
 					return config.plugins.emuman.cam.value
 			#PKT
-			elif fileExists("//usr/lib/enigma2/python/Plugins/Extensions/PKT/plugin.pyo"):
+			elif fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/PKT/plugin.pyo")):
 				if config.plugins.emuman.cam.value: 
 					return config.plugins.emuman.cam.value
 			#HDMU
@@ -341,7 +341,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 				except:
 					camdlist = None
 			# GP3
-			elif fileExists("/usr/lib/enigma2/python/Plugins/Bp/geminimain/lib/libgeminimain.so"):
+			elif fileExists(resolveFilename(SCOPE_LIBDIR, "enigma2/python/Plugins/Bp/geminimain/lib/libgeminimain.so")):
 				try:
 					from Plugins.Bp.geminimain.plugin import GETCAMDLIST
 					from Plugins.Bp.geminimain.lib import libgeminimain

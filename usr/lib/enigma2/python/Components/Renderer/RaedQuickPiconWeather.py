@@ -4,9 +4,11 @@ from Tools.Directories import fileExists
 #from Tools.Alternatives import GetWithAlternative
 from Components.config import config
 from Components.Converter.Poll import Poll
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 class RaedQuickPiconWeather(Renderer, Poll):
-    searchPaths = ('/usr/share/enigma2/%s/', '/usr/lib/enigma2/python/Plugins/Extensions/%s/')
+    searchPaths = ('/usr/share/enigma2/%s/')
+    searchPaths.append(resolveFilename(SCOPE_PLUGINS, 'Extensions/%s/'))
 
     def __init__(self):
         Renderer.__init__(self)

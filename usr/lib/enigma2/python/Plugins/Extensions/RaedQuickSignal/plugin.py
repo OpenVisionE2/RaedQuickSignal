@@ -61,28 +61,28 @@ def dellog(label_name = '', data = None):
 ##############################################################################
 if getDesktop(0).size().width() == 1280:
         Space = "             "
-        SKIN_setup = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Setup.xml"
-        SKIN_WeatherLocation = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/WeatherLocation.xml"
-        SKIN_AGC_Picon = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/AGC_Picon.xml"
-        SKIN_AGC_Event_Des = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/AGC_Event_Des.xml"
-        SKIN_AGC_Weather = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/AGC_Weather.xml"
-        SKIN_Event_Progress_Picon = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Picon.xml"
-        SKIN_Event_Progress_Event_Des = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Event_Des.xml"
-        SKIN_Event_Progress_Weather = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Weather.xml"
-	SKIN_AGC_Picon_media = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/AGC_Picon_media.xml"
-        SKIN_Event_Progress_Picon_media = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Picon_media.xml"
+        SKIN_setup = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/Setup.xml")
+        SKIN_WeatherLocation = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/WeatherLocation.xml")
+        SKIN_AGC_Picon = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/AGC_Picon.xml")
+        SKIN_AGC_Event_Des = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/AGC_Event_Des.xml")
+        SKIN_AGC_Weather = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/AGC_Weather.xml")
+        SKIN_Event_Progress_Picon = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/Event_Progress_Picon.xml")
+        SKIN_Event_Progress_Event_Des = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/Event_Progress_Event_Des.xml")
+        SKIN_Event_Progress_Weather = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/Event_Progress_Weather.xml")
+	SKIN_AGC_Picon_media = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/AGC_Picon_media.xml")
+        SKIN_Event_Progress_Picon_media = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/Event_Progress_Picon_media.xml")
 else:
         Space = "                                          "
-        SKIN_setup = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Setup_FHD.xml"
-        SKIN_WeatherLocation = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/WeatherLocation.xml"
-        SKIN_AGC_Picon = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/AGC_Picon_FHD.xml"
-        SKIN_AGC_Event_Des = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/AGC_Event_Des_FHD.xml"
-        SKIN_AGC_Weather = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/AGC_Weather_FHD.xml"
-        SKIN_Event_Progress_Picon = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Picon_FHD.xml"
-        SKIN_Event_Progress_Event_Des = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Event_Des_FHD.xml"
-        SKIN_Event_Progress_Weather = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Weather_FHD.xml"
-	SKIN_AGC_Picon_media = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/AGC_Picon_media_FHD.xml"
-        SKIN_Event_Progress_Picon_media = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/screens/Event_Progress_Picon_media_FHD.xml"
+        SKIN_setup = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/Setup_FHD.xml")
+        SKIN_WeatherLocation = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/WeatherLocation.xml")
+        SKIN_AGC_Picon = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/AGC_Picon_FHD.xml")
+        SKIN_AGC_Event_Des = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/AGC_Event_Des_FHD.xml")
+        SKIN_AGC_Weather = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/AGC_Weather_FHD.xml")
+        SKIN_Event_Progress_Picon = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/Event_Progress_Picon_FHD.xml")
+        SKIN_Event_Progress_Event_Des = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/Event_Progress_Event_Des_FHD.xml")
+        SKIN_Event_Progress_Weather = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/Event_Progress_Weather_FHD.xml")
+	SKIN_AGC_Picon_media = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/AGC_Picon_media_FHD.xml")
+        SKIN_Event_Progress_Picon_media = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/screens/Event_Progress_Picon_media_FHD.xml")
 ##############################################################################
 config.plugins.RaedQuickSignal = ConfigSubsection()
 config.plugins.RaedQuickSignal.enabled = ConfigYesNo(default=True)
@@ -384,7 +384,7 @@ class RaedQuickSignal():
                 self.qsignal=None
                 if os.path.exists("/tmp/.qsignal"):
                        os.remove("/tmp/.qsignal")
-                keymap = "/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/keymap.xml"
+                keymap = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/keymap.xml")
                 global globalActionMap
                 readKeymap(keymap)
                 if 'displayHelp' in globalActionMap.actions:
@@ -455,7 +455,7 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
                 self.close(True)
 
         def keyOk(self):
-            countriesFile='/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/countries'
+            countriesFile = resolveFilename(SCOPE_PLUGINS, 'Extensions/RaedQuickSignal/countries')
             countries=open(countriesFile).readlines()
             clist=[]
             for country in countries:
@@ -483,7 +483,7 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
                         for x in self['config'].list:
                             x[1].save()
                         configfile.save()
-                        keyfile = open("/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/keymap.xml", "w")
+                        keyfile = open(resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/keymap.xml", "w"))
                         keyfile.write('<keymap>\n\t<map context="GlobalActions">\n\t\t<key id="%s" mapto="showRaedQuickSignal" flags="m" />\n\t</map>\n</keymap>' % config.plugins.RaedQuickSignal.keyname.value)
                         keyfile.close()
                         if not self.currenabled_value==config.plugins.RaedQuickSignal.enabled.value or not self.currkeyname_value==config.plugins.RaedQuickSignal.keyname.value :
