@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 from Renderer import Renderer
 from enigma import ePixmap, eServiceCenter, eServiceReference

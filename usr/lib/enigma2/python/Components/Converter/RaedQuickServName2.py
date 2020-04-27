@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Extended ServiceName Converter for Enigma2 Dreamboxes (ServiceName2.py)
