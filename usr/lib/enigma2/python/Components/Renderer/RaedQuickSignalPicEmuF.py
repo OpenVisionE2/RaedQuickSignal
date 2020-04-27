@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from __future__ import print_function
 #Coders by Nikolasi
 #EDit BY RAED To QuickSignal 2018
 from Components.Pixmap import Pixmap 
@@ -269,7 +271,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                                                  value = self.getText()
                                                  value = value.lower()#change value to small letters
                                                  if value is None:
-                                                        print "no emu installed"
+                                                        print("no emu installed")
                                                         sname=''
                                                  else:
                                                         ## Should write name be small letters
@@ -297,7 +299,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                                                                      if ("address" in line):
                                                                              sname = "CCcam"
                                               except:
-                                                print ""
+                                                print("")
 
                                             if caids:
                                                    if (len(caids) > 0):

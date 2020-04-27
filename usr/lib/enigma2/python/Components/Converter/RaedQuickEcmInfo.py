@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # QuickEcmInfo converter (c) 2boom 2012-13 v 1.0.2 
 #<widget source="session.CurrentService" render="Label" position="462,153" size="50,22" font="Regular; 17" zPosition="2" backgroundColor="background1" foregroundColor="white" transparent="1">
 #    <convert type="QuickEcmInfo">ecmfile | emuname | caids</convert>

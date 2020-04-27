@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 ## MSNWeather Converter
 ## Coded by Sirius
 ## version 0.7

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from __future__ import print_function
 #RAEDQuickSignal (c) RAED 07-02-2014
 #Thank's mfaraj to help with some codes
 
@@ -144,10 +146,10 @@ def readurl(url):
         return data
     except urllib2.URLError as e:
         if hasattr(e, 'code'):
-            print 'We failed with error code - %s.' % e.code
+            print('We failed with error code - %s.' % e.code)
         elif hasattr(e, 'reason'):
-            print 'We failed to reach a server.'
-            print 'Reason: %s' % e.reason
+            print('We failed to reach a server.')
+            print('Reason: %s' % e.reason)
 
 def getcities(weather_location):
         url='http://www.geonames.org/advanced-search.html?q=&country=%s&featureClass=P&continentCode=' % weather_location.upper()

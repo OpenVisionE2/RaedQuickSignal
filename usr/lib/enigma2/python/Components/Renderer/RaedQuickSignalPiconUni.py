@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from __future__ import print_function
 # PiconUni
 # Copyright (c) 2boom 2012-15
 # 
@@ -76,7 +78,7 @@ class RaedQuickSignalPiconUni(Renderer, Poll):
 	        self.poll_interval = 50
 	        self.poll_enabled = True
 		if self.instance:
-                        print "raedwhat2",str(what),"**",str(self.CHANGED_CLEAR)
+                        print("raedwhat2",str(what),"**",str(self.CHANGED_CLEAR))
 			pngname = ''
 			if not what[0] is self.CHANGED_CLEAR:
 				sname = self.source.text
@@ -86,7 +88,7 @@ class RaedQuickSignalPiconUni(Renderer, Poll):
 				if ':' in sname:
 					sname = '_'.join(sname.split(':')[:10])
 				pngname = self.nameCache.get(sname, '')
-				print "raedpngname",str(pngname)
+				print("raedpngname",str(pngname))
 				if pngname is '':
 					pngname = self.findPicon(sname)
 					if not pngname is '':
@@ -101,9 +103,9 @@ class RaedQuickSignalPiconUni(Renderer, Poll):
 							pngname = tmp
 					self.nameCache['default'] = pngname
 
-			print "raedpngnameself.pngname",str(pngname),"**",self.pngname	
+			print("raedpngnameself.pngname",str(pngname),"**",self.pngname	)
 			if not self.pngname is pngname:
-                                print "raedpngnameself.pngname2",str(pngname),"**",self.pngname
+                                print("raedpngnameself.pngname2",str(pngname),"**",self.pngname)
 				self.picload = ePicLoad()
 				try:
 				        self.picload.PictureData.get().append(self.piconShow)
