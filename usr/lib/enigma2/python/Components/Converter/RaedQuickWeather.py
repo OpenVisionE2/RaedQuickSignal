@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import division
 ## MSNWeather Converter
 ## Coded by Sirius
 ## version 0.7
@@ -377,7 +376,7 @@ class RaedQuickWeather(Poll, Converter, object):
 					else:
 						hi0weather = line.split('high')[1].split('"')[1] + '%s' % unichr(176).encode("latin-1")
 						msnweather['Hightemp0'] = '%s%s' % (hi0weather, degreetype)
-					msnweather['Temp0'] =  '%s // %s' % (hi0weather, low0weather)
+					msnweather['Temp0'] =  '%s / %s' % (hi0weather, low0weather)
 					msnweather['Picon0'] = line.split('skycodeday')[1].split('"')[1]
 					msnweather['Date0'] = line.split('date')[2].split('"')[1].split("-")[2].strip() + '.' + line.split('date')[2].split('"')[1].split("-")[1].strip() + '.' + line.split('date')[2].split('"')[1].split("-")[0].strip()
 					msnweather['Shortdate0'] = line.split('shortday')[2].split('"')[1] + ' ' + line.split('date')[2].split('"')[1].split("-")[2].strip()
@@ -399,7 +398,7 @@ class RaedQuickWeather(Poll, Converter, object):
 					else:
 						hi1weather = line.split('high')[2].split('"')[1] + '%s' % unichr(176).encode("latin-1")
 						msnweather['Hightemp1'] = '%s%s' % (hi1weather, degreetype)
-					msnweather['Temp1'] =  '%s // %s' % (hi1weather, low1weather)
+					msnweather['Temp1'] =  '%s / %s' % (hi1weather, low1weather)
 					msnweather['Picon1'] = line.split('skycodeday')[2].split('"')[1]
 					msnweather['Date1'] = line.split('date')[3].split('"')[1].split("-")[2].strip() + '.' + line.split('date')[3].split('"')[1].split("-")[1].strip() + '.' + line.split('date')[3].split('"')[1].split("-")[0].strip()
 					msnweather['Shortdate1'] = line.split('shortday')[3].split('"')[1] + ' ' + line.split('date')[3].split('"')[1].split("-")[2].strip()
@@ -421,7 +420,7 @@ class RaedQuickWeather(Poll, Converter, object):
 					else:
 						hi2weather = line.split('high')[3].split('"')[1] + '%s' % unichr(176).encode("latin-1")
 						msnweather['Hightemp2'] = '%s%s' % (hi2weather, degreetype)
-					msnweather['Temp2'] =  '%s // %s' % (hi2weather, low2weather)
+					msnweather['Temp2'] =  '%s / %s' % (hi2weather, low2weather)
 					msnweather['Picon2'] = line.split('skycodeday')[3].split('"')[1]
 					msnweather['Date2'] = line.split('date')[4].split('"')[1].split("-")[2].strip() + '.' + line.split('date')[4].split('"')[1].split("-")[1].strip() + '.' + line.split('date')[4].split('"')[1].split("-")[0].strip()
 					msnweather['Shortdate2'] = line.split('shortday')[4].split('"')[1] + ' ' + line.split('date')[4].split('"')[1].split("-")[2].strip()
@@ -443,7 +442,7 @@ class RaedQuickWeather(Poll, Converter, object):
 					else:
 						hi3weather = line.split('high')[4].split('"')[1] + '%s' % unichr(176).encode("latin-1")
 						msnweather['Hightemp3'] = '%s%s' % (hi3weather, degreetype)
-					msnweather['Temp3'] =  '%s // %s' % (hi3weather, low3weather)
+					msnweather['Temp3'] =  '%s / %s' % (hi3weather, low3weather)
 					msnweather['Picon3'] = line.split('skycodeday')[4].split('"')[1]
 					msnweather['Date3'] = line.split('date')[5].split('"')[1].split("-")[2].strip() + '.' + line.split('date')[5].split('"')[1].split("-")[1].strip() + '.' + line.split('date')[5].split('"')[1].split("-")[0].strip()
 					msnweather['Shortdate3'] = line.split('shortday')[5].split('"')[1] + ' ' + line.split('date')[5].split('"')[1].split("-")[2].strip()
@@ -465,7 +464,7 @@ class RaedQuickWeather(Poll, Converter, object):
 					else:
 						hi4weather = line.split('high')[5].split('"')[1] + '%s' % unichr(176).encode("latin-1")
 						msnweather['Hightemp4'] = '%s%s' % (hi4weather, degreetype)
-					msnweather['Temp4'] =  '%s // %s' % (hi4weather, low4weather)
+					msnweather['Temp4'] =  '%s / %s' % (hi4weather, low4weather)
 					msnweather['Picon4'] = line.split('skycodeday')[5].split('"')[1]
 					msnweather['Date4'] = line.split('date')[6].split('"')[1].split("-")[2].strip() + '.' + line.split('date')[6].split('"')[1].split("-")[1].strip() + '.' + line.split('date')[6].split('"')[1].split("-")[0].strip()
 					msnweather['Shortdate4'] = line.split('shortday')[6].split('"')[1] + ' ' + line.split('date')[6].split('"')[1].split("-")[2].strip()
