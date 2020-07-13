@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import division
 #
 # Extended ServiceName Converter for Enigma2 Dreamboxes (ServiceName2.py)
 # Coded by vlamo (c) 2011
@@ -172,7 +171,7 @@ class RaedQuickServName2(Converter, object):
 				else:
 					result += type
 			elif f == 'F':	# %F - frequency (dvb-s/s2/c/t) in KHz
-				result += '%d'%(self.tpdata.get('frequency', 0) // 1000)
+				result += '%d'%(self.tpdata.get('frequency', 0) / 1000)
 			elif f == 'f':	# %f - fec_inner (dvb-s/s2/c/t)
 				if type in ('DVB-S','DVB-C'):
 					x = self.tpdata.get('fec_inner', 15)
@@ -199,7 +198,7 @@ class RaedQuickServName2(Converter, object):
 					result += x in range(4) and {0:'H',1:'V',2:'L',3:'R'}[x] or '?'
 			elif f == 'Y':	# %Y - symbol_rate (dvb-s/s2/c)
 				if type in ('DVB-S','DVB-C'):
-					result += '%d'%(self.tpdata.get('symbol_rate', 0) // 1000)
+					result += '%d'%(self.tpdata.get('symbol_rate', 0) / 1000)
 			elif f == 'r':	# %r - rolloff (dvb-s2)
 				x = self.tpdata.get('rolloff')
 				if not x is None:

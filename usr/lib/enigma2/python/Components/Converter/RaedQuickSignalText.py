@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import division
 #######################################################################
 #
 #    Converter for Dreambox-Enigma2
@@ -70,7 +69,7 @@ class RaedQuickSignalText(Converter, object):
 			percent = self.source.agc
 		if percent is None:
 			return "N/A"
-		return "%d" % (percent * 100 // 65536)
+		return "%d" % (percent * 100 / 65536)
 
 	text = property(getText)
 
@@ -80,12 +79,12 @@ class RaedQuickSignalText(Converter, object):
 			count = self.source.snr		
 			if count is None:
 				return 0	
-			return (count * 100 // 65536)
+			return (count * 100 / 65536)
 		elif self.type == self.AGCNUM:
 			count = self.source.agc			
 			if count is None:
 				return 0						
-			return (count * 100 // 65536)
+			return (count * 100 / 65536)
 		elif self.type == self.BERNUM:
 			count = self.source.ber		
 			if count < 320000:
@@ -132,7 +131,7 @@ class RaedQuickSignalText(Converter, object):
 			m = t.tm_min
 			if c > 11:
 				c = c - 12
-			val = (c * 5) + (m // 12)
+			val = (c * 5) + (m / 12)
 			return val
 		return 0
 
