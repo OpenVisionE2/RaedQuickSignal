@@ -251,7 +251,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 			nameemu = []
 			nameser = []
 			# Alternative SoftCam Manager 
-			if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/AlternativeSoftCamManager/plugin.pyo")): 
+			if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/AlternativeSoftCamManager/plugin.py")): 
 				if config.plugins.AltSoftcam.actcam.value != "none": 
 					return config.plugins.AltSoftcam.actcam.value 
 				else: 
