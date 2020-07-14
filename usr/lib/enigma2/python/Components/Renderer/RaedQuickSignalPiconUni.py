@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
 # PiconUni
 # Copyright (c) 2boom 2012-15
 # 
@@ -30,112 +29,123 @@ from __future__ import print_function
 # 02.07.2014 small fix reference
 # 09.01.2015 redesign code
 # 17.08.2018 Update by mfraja to RAEDQuickSignal plugins
+# 07.12.2018 Update by mfraja to RAEDQuickSignal plugins fix picon show on DreamOS
 
-from Renderer import Renderer 
+from __future__ import print_function
+
+from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap, ePicLoad
 from Components.AVSwitch import AVSwitch
-from Tools.Directories import SCOPE_CURRENT_SKIN, SCOPE_PLUGINS, resolveFilename 
+from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS, resolveFilename 
 import os
-from Components.Converter.Poll import Poll
 
-searchPaths = []
+try:
+    from Components.Converter.Poll import PollConverter as Poll
+    dreamos=True
+except:
+    from Components.Converter.Poll import Poll
+    dreamos=False
 
-def initPiconPaths():
-	global searchPaths
-	if os.path.isfile('/proc/mounts'):
-		for line in open('/proc/mounts'):
-			if '/dev/sd' in line:
-				piconPath = line.split()[1].replace('\\040', ' ') + '/%s/'
-				searchPaths.append(piconPath)
-	searchPaths.append(resolveFilename(SCOPE_CURRENT_SKIN, '%s/'))
-	searchPaths.append(resolveFilename(SCOPE_PLUGINS, '%s/'))
+#searchPaths = []
 
+#def initPiconPaths():
+        #global searchPaths
+        #if os.path.isfile('/proc/mounts'):
+        #       for line in open('/proc/mounts'):
+        #               if '/dev/sd' in line:
+        #                       piconPath = line.split()[1].replace('\\040', ' ') + '/%s/'
+        #                       searchPaths.append(piconPath)
+        #searchPaths.append(resolveFilename(SCOPE_CURRENT_SKIN, '%s/'))
+        #searchPaths.append(resolveFilename(SCOPE_PLUGINS, '%s/'))
+        
 class RaedQuickSignalPiconUni(Renderer, Poll):
-	__module__ = __name__
-	def __init__(self):
-		Renderer.__init__(self)
-		Poll.__init__(self)
-		self.path = 'piconUni'
-		self.scale = '0'
-		self.nameCache = {}
-		self.pngname = ''
-		self.picon_default = "picon_default.png"
+        __module__ = __name__
+        searchPaths = ('/data/%s/', '/usr/share/enigma2/%s/', '/usr/lib/enigma2/python/Plugins/Extensions/%s/', '/media/sde1/%s/', '/media/cf/%s/', '/media/sdd1/%s/', '/media/hdd/%s/', '/media/usb/%s/', '/media/ba/%s/', '/mnt/ba/%s/', '/media/sda/%s/', '/etc/%s/')
 
-	def applySkin(self, desktop, parent):
-		attribs = []
-		for (attrib, value,) in self.skinAttributes:
-			if (attrib == 'path'):
-				self.path = value
-			elif (attrib == 'picon_default'):
-				self.picon_default = value
-			else:
-				attribs.append((attrib, value))
-		self.skinAttributes = attribs
-		return Renderer.applySkin(self, desktop, parent)
+        def __init__(self):
+                Renderer.__init__(self)
+                if dreamos:
+                   Poll.__init__(self,type)
+                else:
+                   Poll.__init__(self)
+                self.path = 'piconUni'
+                self.scale = '0'
+                self.nameCache = {}
+                self.pngname = ''
+                self.picon_default = "picon_default.png"
 
-	GUI_WIDGET = ePixmap
+        def applySkin(self, desktop, parent):
+                attribs = []
+                for (attrib, value,) in self.skinAttributes:
+                        if (attrib == 'path'):
+                                self.path = value
+                        elif (attrib == 'picon_default'):
+                                self.picon_default = value
+                        else:
+                                attribs.append((attrib, value))
+                self.skinAttributes = attribs
+                return Renderer.applySkin(self, desktop, parent)
 
-	def changed(self, what):
-	        self.poll_interval = 50
-	        self.poll_enabled = True
-		if self.instance:
+        GUI_WIDGET = ePixmap
+
+        def changed(self, what):
+                self.poll_interval = 50
+                self.poll_enabled = True
+                if self.instance:
                         print("raedwhat2",str(what),"**",str(self.CHANGED_CLEAR))
-			pngname = ''
-			if not what[0] is self.CHANGED_CLEAR:
-				sname = self.source.text
-				sname = sname.upper().replace('.', '').replace('\xc2\xb0', '')
-				if sname.startswith('4097'):
-					sname = sname.replace('4097', '1', 1)
-				if ':' in sname:
-					sname = '_'.join(sname.split(':')[:10])
-				pngname = self.nameCache.get(sname, '')
-				print("raedpngname",str(pngname))
-				if pngname is '':
-					pngname = self.findPicon(sname)
-					if not pngname is '':
-						self.nameCache[sname] = pngname
-			if pngname is '':
-				pngname = self.nameCache.get('default', '')
-				if pngname is '':
-					pngname = self.findPicon('picon_default')
-					if pngname is '':
-						tmp = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
-						if os.path.isfile(tmp):
-							pngname = tmp
-					self.nameCache['default'] = pngname
+                        pngname = ''
+                        if what[0] != self.CHANGED_CLEAR:
+                                sname = self.source.text
+                                sname = sname.upper().replace('.', '').replace('\xc2\xb0', '')
+                                if sname.startswith('4097'):
+                                        sname = sname.replace('4097', '1', 1)
+                                if ':' in sname:
+                                        sname = '_'.join(sname.split(':')[:10])
+                                pngname = self.nameCache.get(sname, '')
+                                print("raedpngname",str(pngname))
+                                if pngname == '':
+                                        pngname = self.findPicon(sname)
+                                        if pngname != '':
+                                                self.nameCache[sname] = pngname
+                        if pngname == '':
+                                pngname = self.nameCache.get('default', '')
+                                if pngname == '':
+                                        pngname = self.findPicon('picon_default')
+                                        if pngname == '':
+                                                tmp = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
+                                                if os.path.isfile(tmp):
+                                                        pngname = tmp
+                                                else:
+                                                        pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/picon_default.png')
+                                        self.nameCache['default'] = pngname
 
-			print("raedpngnameself.pngname",str(pngname),"**",self.pngname	)
-			if not self.pngname is pngname:
+                        print("raedpngnameself.pngname",str(pngname),"**",self.pngname) 
+                        if self.pngname != pngname:
                                 print("raedpngnameself.pngname2",str(pngname),"**",self.pngname)
-				self.picload = ePicLoad()
-				try:
-				        self.picload.PictureData.get().append(self.piconShow)
-				except:
-				        self.picload_conn = self.picload.PictureData.connect(self.piconShow)
-				scale = AVSwitch().getFramebufferScale()
-				#0=Width 1=Height 2=Aspect 3=use_cache 4=resize_type 5=Background(#AARRGGBB)
-				#self.picload.setPara((self.instance.size().width(), self.instance.size().height(), 1, 1, False, 1, "#00000000"))
-				self.picload.setPara((self.instance.size().width(), self.instance.size().height(), scale[0], scale[1], False, 1, "#00000000"))
-				self.picload.startDecode(pngname)
-				self.pngname = pngname
+                                self.picload = ePicLoad()
+                                try:
+                                        self.picload.PictureData.get().append(self.piconShow)
+                                except:
+                                        self.picload_conn = self.picload.PictureData.connect(self.piconShow)
+                                scale = AVSwitch().getFramebufferScale()
+                                #0=Width 1=Height 2=Aspect 3=use_cache 4=resize_type 5=Background(#AARRGGBB)
+                                #self.picload.setPara((self.instance.size().width(), self.instance.size().height(), 1, 1, False, 1, "#00000000"))
+                                self.picload.setPara((self.instance.size().width(), self.instance.size().height(), scale[0], scale[1], False, 1, "#00000000"))
+                                self.picload.startDecode(pngname)
+                                self.pngname = pngname
 
-	def piconShow(self, picInfo = None):
-		ptr = self.picload.getData()
-		if not ptr is None:
-			self.instance.setPixmap(ptr.__deref__())
-		return
+        def piconShow(self, picInfo = None):
+                ptr = self.picload.getData()
+                if ptr != None:
+                        self.instance.setPixmap(ptr.__deref__())
+                return
 
-	def findPicon(self, serviceName):
-		global searchPaths
-		pathtmp = self.path.split(',')
-		for path in searchPaths:
-			for dirName in pathtmp:
-                            try:
-				pngname = (path % dirName) + serviceName + '.png'
-				if os.path.isfile(pngname):
-					return pngname
-                            except:
-				pass
-		return ''
+        def findPicon(self, serviceName):
+                #global searchPaths
+                for path in self.searchPaths:
+                        pngname = (((path % self.path) + serviceName) + '.png')
+                        if fileExists(pngname):
+                                return pngname
+                return ''
 
-initPiconPaths()
+#initPiconPaths()

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from Renderer import Renderer
 from enigma import ePixmap, eServiceCenter, eServiceReference
-from Tools.Directories import fileExists
+import os
 #from Tools.Alternatives import GetWithAlternative
 from Components.config import config
 from Components.Converter.Poll import Poll
@@ -65,9 +65,9 @@ class RaedQuickPiconWeather(Renderer, Poll):
                     if pngname == '':
                         serviceHandler = eServiceCenter.getInstance()
                         service = eServiceReference(s_name)
-                        if service and service is not None:
+                        if service and service != None:
                             info = serviceHandler.info(service)
-                            if info and info is not None:
+                            if info and info != None:
                                 service_name = info.getName(service).replace('\xc2\x86', '').replace('\xc2\x87', '').replace('/', '_')
                                 pngname = self.findPicon(service_name)
                     if pngname == '' and sname.startswith('4097_'):
@@ -89,17 +89,17 @@ class RaedQuickPiconWeather(Renderer, Poll):
             path_size = config.usage.picon_dir.value + '_' + self.size + '/'
             for path in (path_size, path_normal):
                 pngname = path + serviceName + '.png'
-                if fileExists(pngname):
+                if os.path.exists(pngname):
                     return pngname
 
         for path in self.searchPaths:
             if self.size:
                 mypath = self.path + '_' + self.size
                 pngname = path % mypath + serviceName + '.png'
-                if fileExists(pngname):
+                if os.path.exists(pngname):
                     return pngname
             pngname = path % self.path + serviceName + '.png'
-            if fileExists(pngname):
+            if os.path.exists(pngname):
                 return pngname
 
         return ''

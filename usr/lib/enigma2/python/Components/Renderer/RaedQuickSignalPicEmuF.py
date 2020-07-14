@@ -1,26 +1,37 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
 #Coders by Nikolasi
 #EDit BY RAED To QuickSignal 2018
+
+from __future__ import print_function
+
+from enigma import getDesktop, eServiceCenter, eServiceReference, iServiceInformation, iPlayableService, eDVBFrontendParametersSatellite, eDVBFrontendParametersCable, ePixmap, eTimer 
+from Tools.LoadPixmap import LoadPixmap 
 from Components.Pixmap import Pixmap 
-from Renderer import Renderer
-from enigma import getDesktop, iServiceInformation 
-from string import upper 
-from enigma import ePixmap 
-from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, resolveFilename, SCOPE_PLUGINS, SCOPE_LIBDIR
+from Components.Renderer.Renderer import Renderer
+from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, resolveFilename 
 from Components.config import config
 from Components.Element import cached
 import os
-from Components.Converter.Poll import Poll
+
+from sys import version_info
+
+try:
+    from Components.Converter.Poll import PollConverter as Poll
+    dreamos=True
+except:
+    from Components.Converter.Poll import Poll
+    dreamos=False
 
 class RaedQuickSignalPicEmuF(Renderer, Poll):
         __module__ = __name__
-        searchPaths = ('/usr/share/enigma2/%s/', '/media/sde1/%s/', '/media/cf/%s/', '/media/sdd1/%s/', '/media/usb/%s/', '/media/ba/%s/', '/mnt/ba/%s/', '/media/sda/%s/', '/etc/%s/')
-	searchPaths.append(resolveFilename(SCOPE_PLUGINS, 'Extensions/%s/'))
+        searchPaths = ('/data/%s/', '/usr/share/enigma2/%s/', '/usr/lib/enigma2/python/Plugins/Extensions/%s/', '/media/sde1/%s/', '/media/cf/%s/', '/media/sdd1/%s/', '/media/hdd/%s/', '/media/usb/%s/', '/media/ba/%s/', '/mnt/ba/%s/', '/media/sda/%s/', '/etc/%s/')
         
         def __init__(self):
-                Poll.__init__(self)
+                if dreamos:
+                   Poll.__init__(self,type)
+                else:
+                   Poll.__init__(self)
                 Renderer.__init__(self)
                 if getDesktop(0).size().width() == 1920:
                       self.path = 'emu2'
@@ -59,7 +70,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                 if not info:
                         return ""
                 # Alternative SoftCam Manager 
-                if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/AlternativeSoftCamManager/plugin.pyo")): 
+                if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/plugin.py"): 
                         if config.plugins.AltSoftcam.actcam.value != "none": 
                                 return config.plugins.AltSoftcam.actcam.value 
                         else: 
@@ -67,7 +78,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                 #  GlassSysUtil 
                 elif fileExists("/tmp/ucm_cam.info"):
                         return open("/tmp/ucm_cam.info").read()
-                # Pli
+                # OV
                 elif fileExists("/etc/init.d/softcam") or fileExists("/etc/init.d/cardserver"):
                         try:
                                 for line in open("/etc/init.d/softcam"):
@@ -83,15 +94,17 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                                 serlist = "%s" % nameser[1].split('"')[1]
                         except:
                                 pass
-                        if serlist is not None and camdlist is not None:
+                        if serlist != None and camdlist != None:
                                 return ("%s %s" % (serlist, camdlist))
-                        elif camdlist is not None:
+                        elif camdlist != None:
                                 return "%s" % camdlist
-                        elif serlist is not None:
+                        elif serlist != None:
                                 return "%s" % serlist
                         return ""
+                else:
+                        return None
                         
-                if serlist is not None:
+                if serlist != None:
                         try:
                                 cardserver = ""
                                 for current in serlist.readlines():
@@ -102,7 +115,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                 else:
                         cardserver = " "
 
-                if camdlist is not None:
+                if camdlist != None:
                         try:
                                 emu = ""
                                 for current in camdlist.readlines():
@@ -119,7 +132,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
 
         def changed(self, what):
                 self.poll_interval = 50
-	        self.poll_enabled = True
+                self.poll_enabled = True
                 if self.instance:
                         pngname = ''
                         if (what[0] != self.CHANGED_CLEAR):
@@ -134,7 +147,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                                               try:
                                                  value = self.getText()
                                                  value = value.lower()#change value to small letters
-                                                 if value is None:
+                                                 if value == None:
                                                         print("no emu installed")
                                                         sname=''
                                                  else:
@@ -190,6 +203,8 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                                             tmp = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
                                             if fileExists(tmp):
                                                     pngname = tmp
+                                            else:
+                                                    pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/picon_default.png')
                                             self.nameCache['default'] = pngname
 
                         if (self.pngname != pngname):
