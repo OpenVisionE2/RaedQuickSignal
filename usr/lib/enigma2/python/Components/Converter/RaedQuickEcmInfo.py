@@ -5,12 +5,14 @@
 #    <convert type="QuickEcmInfo">ecmfile | emuname | caids</convert>
 #  </widget>
 
-from Poll import Poll
+from __future__ import division
+
+from Components.Converter.Poll import Poll
 from Components.Converter.Converter import Converter
 from enigma import eTimer, iPlayableService, iServiceInformation
 from Components.config import config
 from Components.Element import cached
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_LIBDIR
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LIBDIR
 import os
 try:
 	from bitratecalc import eBitrateCalculator
@@ -133,7 +135,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 		if not info:
 			return ""
 		if self.getServiceInfoString(info, iServiceInformation.sCAIDs):
-			if fileExists("/tmp/ecm.info"):
+			if os.path.exists("/tmp/ecm.info"):
 				try:
 					for line in open("/tmp/ecm.info"):
 						if line.find("caid:") > -1:
@@ -208,7 +210,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 								line = '\n' + line + '\n'
 							ecminfo += line
 					ecmfiles.close()
-					#if fileExists("/tmp/pid.info"):
+					#if os.path.exists("/tmp/pid.info"):
 						#for line in open("/tmp/pid.info"):
 							#ecminfo += line
 				except:
@@ -249,65 +251,16 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 			nameemu = []
 			nameser = []
 			# Alternative SoftCam Manager 
-			if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/AlternativeSoftCamManager/plugin.py")): 
+			if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/AlternativeSoftCamManager/plugin.pyo")): 
 				if config.plugins.AltSoftcam.actcam.value != "none": 
 					return config.plugins.AltSoftcam.actcam.value 
 				else: 
 					return None
-			# TS-Panel
-			elif fileExists("/etc/startcam.sh"):
-				try:
-					for line in open("/etc/startcam.sh"):
-						if line.find("script") > -1:
-							return "%s" % line.split("/")[-1].split()[0][:-3]
-				except:
-					camdlist = None
-			# domica 8120
-			elif fileExists("/etc/init.d/cam"):
-				if config.plugins.emuman.cam.value: 
-					return config.plugins.emuman.cam.value
-			#PKT
-			elif fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/PKT/plugin.pyo")):
-				if config.plugins.emuman.cam.value: 
-					return config.plugins.emuman.cam.value
-			#HDMU
-			elif fileExists("/etc/.emustart") and fileExists("/etc/image-version"):
-				try:
-					for line in open("/etc/.emustart"):
-						return line.split()[0].split('/')[-1]
-				except:
-					camdlist = None
-			# AAF & ATV & VTI 
-			elif fileExists("/etc/image-version") and not fileExists("/etc/.emustart"):
-				emu = ""
-				server = ""
-				for line in open("/etc/image-version"):
-					if line.find("=AAF") > -1 or line.find("=openATV") > -1:
-						if config.softcam.actCam.value: 
-							emu = config.softcam.actCam.value
-						if config.softcam.actCam2.value: 
-							server = config.softcam.actCam2.value
-							if config.softcam.actCam2.value == "no CAM 2 active":
-								server = ""
-					elif line.find("=vuplus") > -1:
-						if fileExists("/tmp/.emu.info"):
-							for line in open("/tmp/.emu.info"):
-								emu = line.strip('\n')
-				return "%s %s" % (emu, server)
-			# BlackHole	
-			elif fileExists("/etc/CurrentBhCamName"):
-				try:
-					camdlist = open("/etc/CurrentBhCamName", "r")
-				except:
-					camdlist = None
-			# Domica	
-			elif fileExists("/etc/active_emu.list"):
-				try:
-					camdlist = open("/etc/active_emu.list", "r")
-				except:
-					camdlist = None
-			#Pli
-			elif fileExists("/etc/init.d/softcam") or fileExists("/etc/init.d/cardserver"):
+			#  GlassSysUtil 
+			elif fileExists("/tmp/ucm_cam.info"):
+				return open("/tmp/ucm_cam.info").read()
+			# OV
+			elif os.path.exists("/etc/init.d/softcam") or os.path.exists("/etc/init.d/cardserver"):
 				try:
 					for line in open("/etc/init.d/softcam"):
 						if line.find("echo") > -1:
@@ -322,42 +275,19 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 					serlist = "%s" % nameser[1].split('"')[1]
 				except:
 					pass
-				if serlist is None:
+				if serlist == None:
 					serlist = ""
-				elif camdlist is None:
+				elif camdlist == None:
 					camdlist = ""
-				elif serlist is None and camdlist is None:
+				elif serlist == None and camdlist == None:
 					serlist = ""
 					camdlist = ""
 				return ("%s %s" % (serlist, camdlist))
-			# OoZooN
-			elif fileExists("/tmp/cam.info"):
-				try:
-					camdlist = open("/tmp/cam.info", "r")
-				except:
-					camdlist = None
-			# Merlin2	
-			elif fileExists("/etc/clist.list"):
-				try:
-					camdlist = open("/etc/clist.list", "r")
-				except:
-					camdlist = None
-			# GP3
-			elif fileExists(resolveFilename(SCOPE_LIBDIR, "enigma2/python/Plugins/Bp/geminimain/lib/libgeminimain.so")):
-				try:
-					from Plugins.Bp.geminimain.plugin import GETCAMDLIST
-					from Plugins.Bp.geminimain.lib import libgeminimain
-					camdl = libgeminimain.getPyList(GETCAMDLIST)
-					for x in camdl:
-						if x[1] == 1:
-							camdlist = x[2] 
-				except:
-					camdlist = None
 			# Unknown emu
 			else:
 				camdlist = None
 				
-			if serlist is not None:
+			if serlist != None:
 				try:
 					cardserver = ""
 					for current in serlist.readlines():
@@ -368,7 +298,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 			else:
 				cardserver = ""
 
-			if camdlist is not None:
+			if camdlist != None:
 				try:
 					emu = ""
 					for current in camdlist.readlines():

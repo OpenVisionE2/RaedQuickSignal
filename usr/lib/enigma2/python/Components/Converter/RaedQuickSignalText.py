@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import division
 #######################################################################
 #
 #    Converter for Dreambox-Enigma2
@@ -67,9 +68,9 @@ class RaedQuickSignalText(Converter, object):
 			percent = self.source.snr
 		elif self.type == self.AGCTEXT:
 			percent = self.source.agc
-		if percent is None:
+		if percent == None:
 			return "N/A"
-		return "%d" % (percent * 100 / 65536)
+		return "%d" % (percent * 100 // 65536)
 
 	text = property(getText)
 
@@ -77,14 +78,14 @@ class RaedQuickSignalText(Converter, object):
 	def getValue(self):	
 		if self.type == self.SNRNUM:
 			count = self.source.snr		
-			if count is None:
+			if count == None:
 				return 0	
-			return (count * 100 / 65536)
+			return (count * 100 // 65536)
 		elif self.type == self.AGCNUM:
 			count = self.source.agc			
-			if count is None:
+			if count == None:
 				return 0						
-			return (count * 100 / 65536)
+			return (count * 100 // 65536)
 		elif self.type == self.BERNUM:
 			count = self.source.ber		
 			if count < 320000:
@@ -92,7 +93,7 @@ class RaedQuickSignalText(Converter, object):
 			return 320000
 		elif self.type == self.STEP:
 			time = self.source.time
-			if time is None:
+			if time == None:
 				return 0
 			t = localtime(time)
 			c = t.tm_sec
@@ -110,28 +111,28 @@ class RaedQuickSignalText(Converter, object):
 			return (c - 50)
 		elif self.type == self.SECHAND:
 			time = self.source.time
-			if time is None:
+			if time == None:
 				return 0
 			t = localtime(time)
 			c = t.tm_sec
 			return c
 		elif self.type == self.MINHAND:
 			time = self.source.time
-			if time is None:
+			if time == None:
 				return 0
 			t = localtime(time)
 			c = t.tm_min
 			return c			
 		elif self.type == self.HOURHAND:
 			time = self.source.time
-			if time is None:
+			if time == None:
 				return 0
 			t = localtime(time)
 			c = t.tm_hour
 			m = t.tm_min
 			if c > 11:
 				c = c - 12
-			val = (c * 5) + (m / 12)
+			val = (c * 5) + (m // 12)
 			return val
 		return 0
 
