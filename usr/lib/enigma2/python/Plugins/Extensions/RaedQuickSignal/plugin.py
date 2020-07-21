@@ -47,6 +47,17 @@ else:
 
 VER = "5.3"
 
+def removeunicode(data):
+    try:
+        try:
+                data = data.encode('utf', 'ignore')
+        except:
+                pass
+        data = data.decode('unicode_escape').encode('ascii', 'replace').replace('?', '').strip()
+    except:
+        pass
+    return data
+
 def trace_error():
     import sys
     import traceback
@@ -145,6 +156,28 @@ ENDC = '\033[m'
 def cprint(text):
     print(REDC+"[RaedQuickSignal] "+text+ENDC)
 
+def downloadFile(url, filePath):
+    try:
+        # Download the file from `url` and save it locally under `file_name`:
+        urlretrieve(url, filePath)
+        return True
+        req = compat_Request(url)
+        response = compat_urlopen(req)        
+        print("response.read",response.read())
+        output = open(filePath, 'wb')
+        output.write(response.read())
+        output.close()
+        response.close()
+        return True
+    except compat_URLError as e:
+        trace_error()
+        if hasattr(e, 'code'):
+            cprint('We failed with error code - %s.' % e.code)
+        elif hasattr(e, 'reason'):
+            cprint('We failed to reach a server.')
+            cprint('Reason: %s' % e.reason)
+    return False
+
 def readurl(url):
     try:
         req = compat_Request(url)
@@ -161,23 +194,23 @@ def readurl(url):
             cprint('Reason: %s' % e.reason)
 
 def getcities(weather_location):
-        url='http://www.geonames.org/advanced-search.html?q=&country=%s&featureClass=P&continentCode=' % weather_location.upper()
-        data=readurl(url).decode('utf-8')
+        url = 'http://www.geonames.org/advanced-search.html?q=&country=%s&featureClass=P&continentCode=' % weather_location.upper()
+        logdata("xmlurl",url)
+	if version_info[0] == 3:
+                data = readurl(url).decode('utf-8')
+	else:
+                data = readurl(url).encode('utf-8')
         if data == None:
                 return []
         try:
-                regx='''<a href=".*?"><img src=".*?" border="0" alt=".*?"></a></td><td><a href=".*?">(.*?)</a>'''
-                match=re.findall(regx,data, re.M|re.I)
-                cities=[]
-                for item in match:
-                    cityName=item.replace(',',"").strip()
-                    try:
-                        if version_info[0] == 3:
-                                cityName=cityName
-                        else:
-                                cityName=cityName.encode("utf-8","ignore")
-                    except:
-                            pass
+                regx = '''<a href="(.*?)"><img src=".*?" border="0" alt=".*?"></a>'''
+                match = re.findall(regx,data, re.M|re.I)
+                cities = []
+                for cityURL in match:
+                    if 'wiki' in cityURL:
+                            continue
+                    cityName = os.path.split(cityURL)[1].replace(".html","")    
+                    logdata('cityName',cityName)
                     if cityName in cities:
                         continue
                     cities.append(cityName)
