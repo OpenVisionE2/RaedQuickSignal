@@ -196,9 +196,9 @@ def readurl(url):
 def getcities(weather_location):
         url = 'http://www.geonames.org/advanced-search.html?q=&country=%s&featureClass=P&continentCode=' % weather_location.upper()
         logdata("xmlurl",url)
-	if version_info[0] == 3:
+        if version_info[0] == 3:
                 data = readurl(url).decode('utf-8')
-	else:
+        else:
                 data = readurl(url).encode('utf-8')
         if data == None:
                 return []
