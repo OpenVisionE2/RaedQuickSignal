@@ -194,17 +194,14 @@ def readurl(url):
             cprint('Reason: %s' % e.reason)
 
 def getcities(weather_location):
-        url = 'http://www.geonames.org/advanced-search.html?q=&country=%s&featureClass=P&continentCode=' % weather_location.upper()
+        url = (b"http://www.geonames.org/advanced-search.html?q=&country=%s&featureClass=P&continentCode=".decode("utf-8")) % str(weather_location.upper())
         logdata("xmlurl",url)
-        if version_info[0] == 3:
-                data = readurl(url).decode('utf-8')
-        else:
-                data = readurl(url).encode('utf-8')
+        data = readurl(url)
         if data == None:
                 return []
         try:
                 regx = '''<a href="(.*?)"><img src=".*?" border="0" alt=".*?"></a>'''
-                match = re.findall(regx,data, re.M|re.I)
+                match = re.findall(str(regx), str(data), re.M|re.I)
                 cities = []
                 for cityURL in match:
                     if 'wiki' in cityURL:
