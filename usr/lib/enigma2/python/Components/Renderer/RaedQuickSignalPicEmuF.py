@@ -156,14 +156,6 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                                                                 sname = "ncam"
                                                         elif ("oscam" in value):
                                                                 sname = "oscam"
-                                                        elif ("mgcamd" in value):
-                                                                sname = "Mgcamd"
-                                                        elif ("wicard" in value or "wicardd" in value):
-                                                                sname = "Wicardd"
-                                                        elif ("gbox" in value):
-                                                                sname = "Gbox"
-                                                        elif ("camd3" in value):
-                                                                sname = "Camd3"
                                                         elif fileExists("/tmp/ecm.info"):
                                                              try:
                                                                 f = open("/tmp/ecm.info", "r")
@@ -172,9 +164,6 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                                                              except:
                                                                 content = ""
                                                              contentInfo = content.split("\n")
-                                                             for line in contentInfo:
-                                                                     if ("address" in line):
-                                                                             sname = "CCcam"
                                               except:
                                                 print("")
 
