@@ -140,7 +140,7 @@ class RaedQuickServName2(Converter, object):
                         return None, num
 
                 if isinstance(ref, eServiceReference):
-                        isRadioService = ref.getData(0) in (2,10)
+                        isRadioService = ref.getData(0) in (2, 10)
                         lastpath = isRadioService and config.radio.lastroot.value or config.tv.lastroot.value
                         if 'FROM BOUQUET' not in lastpath:
                                 if 'FROM PROVIDERS' in lastpath:
@@ -186,9 +186,9 @@ class RaedQuickServName2(Converter, object):
         def getProviderName(self, ref):
                 if isinstance(ref, eServiceReference):
                         from Screens.ChannelSelection import service_types_radio, service_types_tv
-                        typestr = ref.getData(0) in (2,10) and service_types_radio or service_types_tv
+                        typestr = ref.getData(0) in (2, 10) and service_types_radio or service_types_tv
                         pos = typestr.rfind(':')
-                        rootstr = '%s (channelID == %08x%04x%04x) && %s FROM PROVIDERS ORDER BY name' %(typestr[:pos+1],ref.getUnsignedData(4),ref.getUnsignedData(2),ref.getUnsignedData(3),typestr[pos+1:])
+                        rootstr = '%s (channelID == %08x%04x%04x) && %s FROM PROVIDERS ORDER BY name' %(typestr[:pos+1], ref.getUnsignedData(4), ref.getUnsignedData(2), ref.getUnsignedData(3), typestr[pos+1:])
                         provider_root = eServiceReference(rootstr)
                         serviceHandler = eServiceCenter.getInstance()
                         providerlist = serviceHandler.list(provider_root)
@@ -223,16 +223,16 @@ class RaedQuickServName2(Converter, object):
                         type = self.tpdata.get('tuner_type', '')
                 if not fmt or fmt == 'T':
                    if type == 'DVB-C':
-                                   fmt = ["t ","F ","Y ","i ","f ","M"]
+                                   fmt = ["t ", "F ", "Y ", "i ", "f ", "M"]
                    elif type == 'DVB-T':
                                    if ref:
-                                           fmt = ["O ","F ","h ","m ","g ","c"]
+                                           fmt = ["O ", "F ", "h ", "m ", "g ", "c"]
                                    else:
-                                           fmt = ["t ","F ","h ","m ","g ","c"]
+                                           fmt = ["t ", "F ", "h ", "m ", "g ", "c"]
                    elif type == 'IP-TV':
                                    return _("Streaming")
                    else:
-                                   fmt = ["O ","F","p ","Y ","f"]
+                                   fmt = ["O ", "F", "p ", "Y ", "f"]
                 for line in fmt:
                         f = line[:1]
                         if f == 't':    # %t - tuner_type (dvb-s/s2/c/t)
@@ -648,7 +648,7 @@ class RaedQuickServName2(Converter, object):
         def changed(self, what):
                 if what[0] != self.CHANGED_SPECIFIC or what[1] in (iPlayableService.evStart,):
                         self.refstr = self.isStream = self.ref = self.info = self.tpdata = None
-                        if self.type in (self.NUMBER,self.BOUQUET) or \
+                        if self.type in (self.NUMBER, self.BOUQUET) or \
                                 (self.type == self.FORMAT and ('%n' in self.sfmt or '%B' in self.sfmt)):
                                 self.what = what
                                 self.timer.start(200, True)

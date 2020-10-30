@@ -163,7 +163,7 @@ def downloadFile(url, filePath):
         return True
         req = compat_Request(url)
         response = compat_urlopen(req)        
-        print("response.read",response.read())
+        print("response.read", response.read())
         output = open(filePath, 'wb')
         output.write(response.read())
         output.close()
@@ -195,7 +195,7 @@ def readurl(url):
 
 def getcities(weather_location):
         url = (b"http://www.geonames.org/advanced-search.html?q=&country=%s&featureClass=P&continentCode=".decode("utf-8")) % str(weather_location.upper())
-        logdata("xmlurl",url)
+        logdata("xmlurl", url)
         data = readurl(url)
         if data == None:
                 return []
@@ -206,8 +206,8 @@ def getcities(weather_location):
                 for cityURL in match:
                     if 'wiki' in cityURL:
                             continue
-                    cityName = os.path.split(cityURL)[1].replace(".html","")    
-                    logdata('cityName',cityName)
+                    cityName = os.path.split(cityURL)[1].replace(".html", "")    
+                    logdata('cityName', cityName)
                     if cityName in cities:
                         continue
                     cities.append(cityName)
@@ -255,9 +255,9 @@ class WeatherLocationChoiceList(Screen):
                         noneweather.write('None')
                 noneweather.close()
 
-        def get_xmlfile(self,weather_city,weather_location):
+        def get_xmlfile(self, weather_city, weather_location):
                 degreetype = config.plugins.TSweather.degreetype.value
-                weather_city=weather_city.replace(" ","+")
+                weather_city=weather_city.replace(" ", "+")
                 url = 'http://weather.service.msn.com/data.aspx?weadegreetype=%s&culture=%s&weasearchstr=%s&src=outlook' % (degreetype, weather_location, weather_city)
                 file_name = '/tmp/weathermsn.xml'
                 try:
@@ -275,12 +275,12 @@ class WeatherLocationChoiceList(Screen):
                                 os_remove('/tmp/weathermsn.xml')
                         returnValue = self["choicelist"].l.getCurrentSelection()
                         countryCode=self.country.lower()+"-"+self.country.upper()
-                        if self.get_xmlfile(returnValue,countryCode)==False:
-                                self.session.open(MessageBox, _("Sorry, your city is not available."),MessageBox.TYPE_ERROR)
+                        if self.get_xmlfile(returnValue, countryCode)==False:
+                                self.session.open(MessageBox, _("Sorry, your city is not available."), MessageBox.TYPE_ERROR)
                                 return 
                         if not fileExists('/tmp/weathermsn.xml'):
                                 self.write_none()
-                                self.session.open(MessageBox, _("Sorry, your city is not available."),MessageBox.TYPE_ERROR)
+                                self.session.open(MessageBox, _("Sorry, your city is not available."), MessageBox.TYPE_ERROR)
                                 return None
                         if returnValue != None:
                                 self.close(returnValue)
@@ -295,12 +295,12 @@ class WeatherLocationChoiceList(Screen):
                                 os_remove('/tmp/weathermsn.xml')
                         returnValue = self["choicelist"].l.getCurrentSelection()
                         countryCode=self.country.lower()+"-"+self.country.upper()
-                        if self.get_xmlfile(returnValue,countryCode)==False:
-                                self.session.open(MessageBox, _("Sorry, your city is not available."),MessageBox.TYPE_ERROR)
+                        if self.get_xmlfile(returnValue, countryCode)==False:
+                                self.session.open(MessageBox, _("Sorry, your city is not available."), MessageBox.TYPE_ERROR)
                                 return 
                         if not fileExists('/tmp/weathermsn.xml'):
                                 self.write_none()
-                                self.session.open(MessageBox, _("Sorry, your city is not available."),MessageBox.TYPE_ERROR)
+                                self.session.open(MessageBox, _("Sorry, your city is not available."), MessageBox.TYPE_ERROR)
                                 return None
                         if returnValue != None:
                                 self.close(returnValue)
@@ -429,7 +429,7 @@ class RaedQuickSignalScreen(Screen):
                 self["setupActions"] = ActionMap(["WizardActions", "SetupActions", "MenuActions"],
                     {
                          "cancel": self.exit,
-                         "menu":self.showsetup,
+                         "menu": self.showsetup,
                          "up": self.keyUp,
                          "down": self.keyDown,
                          "left": self.keyLeft,
@@ -441,7 +441,7 @@ class RaedQuickSignalScreen(Screen):
         def layoutFinished(self):
                 self.instance.show()
                 self.setTitle("RaedQuickSignal V %s" % VER)
-                cfile = open("/tmp/.qsignal","w")
+                cfile = open("/tmp/.qsignal", "w")
                 cfile.close()
 
         def keyLeft(self):
@@ -470,7 +470,7 @@ class RaedQuickSignalScreen(Screen):
                         self.exit()
                         
         def showsetup(self):
-                self.session.openWithCallback(self.setupback,RaedQuickSignal_setup)
+                self.session.openWithCallback(self.setupback, RaedQuickSignal_setup)
 ##############################################################################
 class RaedQuickSignal():
         def __init__(self):
@@ -556,8 +556,8 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
             countries=open(countriesFile).readlines()
             clist=[]
             for country in countries:
-                countryCode,countryName=country.split(",")
-                clist.append((countryName,countryCode))
+                countryCode, countryName=country.split(",")
+                clist.append((countryName, countryCode))
             from Screens.ChoiceBox import ChoiceBox
             self.session.openWithCallback(self.choicesback, ChoiceBox, _('select your country'), clist)
 
@@ -568,7 +568,7 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
                     config.plugins.TSweather.weather_location.save()
                     self.session.openWithCallback(self.citiesback, WeatherLocationChoiceList, self.country)
                     
-        def citiesback(self,select):
+        def citiesback(self, select):
                 if select:
                   weather_city = select
                   weather_city.capitalize() 

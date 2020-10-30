@@ -65,7 +65,7 @@ class RaedQuickSignalPiconUni(Renderer, Poll):
         def __init__(self):
                 Renderer.__init__(self)
                 if dreamos:
-                   Poll.__init__(self,type)
+                   Poll.__init__(self, type)
                 else:
                    Poll.__init__(self)
                 self.path = 'piconUni'
@@ -92,7 +92,7 @@ class RaedQuickSignalPiconUni(Renderer, Poll):
                 self.poll_interval = 50
                 self.poll_enabled = True
                 if self.instance:
-                        print("raedwhat2",str(what),"**",str(self.CHANGED_CLEAR))
+                        print("raedwhat2", str(what), "**", str(self.CHANGED_CLEAR))
                         pngname = ''
                         if what[0] != self.CHANGED_CLEAR:
                                 sname = self.source.text
@@ -102,7 +102,7 @@ class RaedQuickSignalPiconUni(Renderer, Poll):
                                 if ':' in sname:
                                         sname = '_'.join(sname.split(':')[:10])
                                 pngname = self.nameCache.get(sname, '')
-                                print("raedpngname",str(pngname))
+                                print("raedpngname", str(pngname))
                                 if pngname == '':
                                         pngname = self.findPicon(sname)
                                         if pngname != '':
@@ -119,9 +119,9 @@ class RaedQuickSignalPiconUni(Renderer, Poll):
                                                         pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/picon_default.png')
                                         self.nameCache['default'] = pngname
 
-                        print("raedpngnameself.pngname",str(pngname),"**",self.pngname) 
+                        print("raedpngnameself.pngname", str(pngname), "**", self.pngname) 
                         if self.pngname != pngname:
-                                print("raedpngnameself.pngname2",str(pngname),"**",self.pngname)
+                                print("raedpngnameself.pngname2", str(pngname), "**", self.pngname)
                                 self.picload = ePicLoad()
                                 try:
                                         self.picload.PictureData.get().append(self.piconShow)

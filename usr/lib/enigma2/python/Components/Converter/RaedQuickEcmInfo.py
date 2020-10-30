@@ -194,7 +194,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 					ecmfiles = open("/tmp/ecm.info", "r")
 					for line in ecmfiles:
 						if line.find("caid:") > -1 or line.find("provider:") > -1 or line.find("provid:") > -1 or line.find("pid:") > -1 or line.find("hops:") > -1  or line.find("system:") > -1 or line.find("address:") > -1 or line.find("using:") > -1 or line.find("ecm time:") > -1:
-							line = line.replace(' ',"").replace(":",": ")
+							line = line.replace(' ', "").replace(":", ": ")
 						if line.find("caid:") > -1 or line.find("pid:") > -1 or line.find("reader:") > -1 or line.find("from:") > -1 or line.find("hops:") > -1  or line.find("system:") > -1 or line.find("Service:") > -1 or line.find("CAID:") > -1 or line.find("Provider:") > -1:
 							line = line.strip('\n') + "  "
 						if line.find("Signature") > -1:

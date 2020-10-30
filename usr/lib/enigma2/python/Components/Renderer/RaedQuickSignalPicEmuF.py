@@ -29,7 +29,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
         
         def __init__(self):
                 if dreamos:
-                   Poll.__init__(self,type)
+                   Poll.__init__(self, type)
                 else:
                    Poll.__init__(self)
                 Renderer.__init__(self)
