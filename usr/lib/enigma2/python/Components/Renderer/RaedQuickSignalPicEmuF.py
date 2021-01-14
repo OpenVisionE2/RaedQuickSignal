@@ -4,7 +4,6 @@
 #EDit BY RAED To QuickSignal 2018
 
 from __future__ import print_function
-
 from enigma import getDesktop, eServiceCenter, eServiceReference, iServiceInformation, iPlayableService, eDVBFrontendParametersSatellite, eDVBFrontendParametersCable, ePixmap, eTimer 
 from Tools.LoadPixmap import LoadPixmap 
 from Components.Pixmap import Pixmap 
@@ -13,25 +12,15 @@ from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.config import config
 from Components.Element import cached
 import os
-
 from sys import version_info
-
-try:
-    from Components.Converter.Poll import PollConverter as Poll
-    dreamos=True
-except:
-    from Components.Converter.Poll import Poll
-    dreamos=False
+from Components.Converter.Poll import Poll
 
 class RaedQuickSignalPicEmuF(Renderer, Poll):
         __module__ = __name__
         searchPaths = ('/data/%s/', '/usr/share/enigma2/%s/', '/usr/lib/enigma2/python/Plugins/Extensions/%s/', '/media/sde1/%s/', '/media/cf/%s/', '/media/sdd1/%s/', '/media/hdd/%s/', '/media/usb/%s/', '/media/ba/%s/', '/mnt/ba/%s/', '/media/sda/%s/', '/etc/%s/')
         
         def __init__(self):
-                if dreamos:
-                   Poll.__init__(self, type)
-                else:
-                   Poll.__init__(self)
+                Poll.__init__(self)
                 Renderer.__init__(self)
                 if getDesktop(0).size().width() == 1920:
                       self.path = 'emu2'
@@ -70,7 +59,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                 if not info:
                         return ""
                 # Alternative SoftCam Manager 
-                if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/plugin.py"): 
+                if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/plugin.pyo"): 
                         if config.plugins.AltSoftcam.actcam.value != "none": 
                                 return config.plugins.AltSoftcam.actcam.value 
                         else: 
@@ -146,21 +135,13 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                                             if fileExists("/tmp/ecm.info"):
                                               try:
                                                  value = self.getText()
-                                                 value = value.lower()#change value to small letters
                                                  if value == None:
                                                         print("no emu installed")
                                                         sname=''
                                                  else:
-                                                        ## Should write name be small letters
-                                                        if ("ncam" in value):
-                                                                sname = "ncam"
-                                                        elif ("oscam" in value):
-                                                                sname = "oscam"
-                                                        elif fileExists("/tmp/ecm.info"):
+                                                        if fileExists("/tmp/ecm.info"):
                                                              try:
-                                                                f = open("/tmp/ecm.info", "r")
-                                                                content = f.read()
-                                                                f.close()
+                                                                content = open("/tmp/ecm.info", "r").read()
                                                              except:
                                                                 content = ""
                                                              contentInfo = content.split("\n")
