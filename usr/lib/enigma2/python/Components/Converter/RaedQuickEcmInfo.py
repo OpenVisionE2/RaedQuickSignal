@@ -89,7 +89,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 		if v == -3:
 			t_objs = info.getInfoObject(what)
 			if t_objs and (len(t_objs) > 0):
-				ret_val=""
+				ret_val = ""
 				for t_obj in t_objs:
 					ret_val += "%.4X " % t_obj
 				return ret_val[:-1]
@@ -114,18 +114,18 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 			dvbnamespace = serviceInfo.getInfo(iServiceInformation.sNamespace)
 		if vpid > 0 and self.type == self.bitrate:
 			try:
-				self.videoBitrate = eBitrateCalculator(vpid, dvbnamespace, tsid, onid, 1000, 1024*1024) 
+				self.videoBitrate = eBitrateCalculator(vpid, dvbnamespace, tsid, onid, 1000, 1024 * 1024) 
 				self.videoBitrate.callback.append(self.getVideoBitrateData)
 			except:
-				self.videoBitrate = eBitrateCalculator(vpid, dvbnamespace, tsid, onid, 1000, 1024*1024) 
+				self.videoBitrate = eBitrateCalculator(vpid, dvbnamespace, tsid, onid, 1000, 1024 * 1024) 
 				self.videoBitrate_conn = self.videoBitrate.timeout.connect(self.getVideoBitrateData)
 		if apid > 0 and self.type == self.bitrate:
 			try:
-				self.audioBitrate = eBitrateCalculator(apid, dvbnamespace, tsid, onid, 1000, 64*1024)
+				self.audioBitrate = eBitrateCalculator(apid, dvbnamespace, tsid, onid, 1000, 64 * 1024)
 				self.audioBitrate.callback.append(self.getAudioBitrateData)
 			except:
-				self.audioBitrate = eBitrateCalculator(apid, dvbnamespace, tsid, onid, 1000, 64*1024)
-				self.audioBitrate_conn  = self.audioBitrate.timeout.connect(self.getAudioBitrateData)
+				self.audioBitrate = eBitrateCalculator(apid, dvbnamespace, tsid, onid, 1000, 64 * 1024)
+				self.audioBitrate_conn = self.audioBitrate.timeout.connect(self.getAudioBitrateData)
 		
 	def caidstr(self):
 		caidvalue = ""
@@ -177,7 +177,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 				yres = info.getInfo(iServiceInformation.sVideoHeight)
 				mode = ("i", "p", "")[info.getInfo(iServiceInformation.sProgressive)]
 				xres = info.getInfo(iServiceInformation.sVideoWidth)
-				return "%sx%s(%s) VIDEO %s: %d kbit/s  AUDIO %s: %d kbit/s" % (str(xres), str(yres) + mode, self.getServiceInfoString(info, iServiceInformation.sFrameRate, lambda x: "%d" % ((x+500)/1000)), ("MPEG2", "MPEG4", "MPEG1", "MPEG4-II", "VC1", "VC1-SM", "")[info.getInfo(iServiceInformation.sVideoType)], self.video, audioTrackCodec, self.audio)
+				return "%sx%s(%s) VIDEO %s: %d kbit/s  AUDIO %s: %d kbit/s" % (str(xres), str(yres) + mode, self.getServiceInfoString(info, iServiceInformation.sFrameRate, lambda x: "%d" % ((x + 500) / 1000)), ("MPEG2", "MPEG4", "MPEG1", "MPEG4-II", "VC1", "VC1-SM", "")[info.getInfo(iServiceInformation.sVideoType)], self.video, audioTrackCodec, self.audio)
 				#return "%sx%s(%s) VIDEO %s: %d kbit/s  AUDIO %s: %d kbit/s" % (str(xres), str(yres) + mode, self.getServiceInfoString(info, iServiceInformation.sFrameRate, lambda x: "%d" % ((x+500)/1000)), ("MPEG2", "MPEG4", "MPEG1", "MPEG4-II", "VC1", "VC1-SM", "")[info.getInfo(iServiceInformation.sVideoType)], self.video,str(audio.getTrackInfo(audio.getCurrentTrack()).getDescription()), self.audio)
 			except: 
 				return " "
@@ -193,9 +193,9 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 				try:
 					ecmfiles = open("/tmp/ecm.info", "r")
 					for line in ecmfiles:
-						if line.find("caid:") > -1 or line.find("provider:") > -1 or line.find("provid:") > -1 or line.find("pid:") > -1 or line.find("hops:") > -1  or line.find("system:") > -1 or line.find("address:") > -1 or line.find("using:") > -1 or line.find("ecm time:") > -1:
+						if line.find("caid:") > -1 or line.find("provider:") > -1 or line.find("provid:") > -1 or line.find("pid:") > -1 or line.find("hops:") > -1 or line.find("system:") > -1 or line.find("address:") > -1 or line.find("using:") > -1 or line.find("ecm time:") > -1:
 							line = line.replace(' ', "").replace(":", ": ")
-						if line.find("caid:") > -1 or line.find("pid:") > -1 or line.find("reader:") > -1 or line.find("from:") > -1 or line.find("hops:") > -1  or line.find("system:") > -1 or line.find("Service:") > -1 or line.find("CAID:") > -1 or line.find("Provider:") > -1:
+						if line.find("caid:") > -1 or line.find("pid:") > -1 or line.find("reader:") > -1 or line.find("from:") > -1 or line.find("hops:") > -1 or line.find("system:") > -1 or line.find("Service:") > -1 or line.find("CAID:") > -1 or line.find("Provider:") > -1:
 							line = line.strip('\n') + "  "
 						if line.find("Signature") > -1:
 							line = ""

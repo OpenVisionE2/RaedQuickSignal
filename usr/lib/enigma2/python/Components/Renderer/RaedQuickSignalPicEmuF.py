@@ -137,7 +137,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                                                  value = self.getText()
                                                  if value == None:
                                                         print("no emu installed")
-                                                        sname=''
+                                                        sname = ''
                                                  else:
                                                         if fileExists("/tmp/ecm.info"):
                                                              try:

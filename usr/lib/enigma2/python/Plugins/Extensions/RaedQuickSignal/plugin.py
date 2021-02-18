@@ -69,9 +69,9 @@ def trace_error():
 
 def logdata(label_name='', data=None):
     try:
-        data=str(data)
+        data = str(data)
         fp = open('/tmp/RaedQuickSignal.log', 'a')
-        fp.write(str(label_name) + ': ' + data+"\n")
+        fp.write(str(label_name) + ': ' + data + "\n")
         fp.close()
     except:
         trace_error()    
@@ -144,17 +144,17 @@ try:
         config.plugins.TSweather.degreetype = ConfigSelection(default="C", choices=[
                 ("C", _("Celsius")),
                 ("F", _("Fahrenheit"))])
-        config.plugins.TSweather.weather_location= ConfigText(default="bh-BH", visible_width=250, fixed_size=False)       
+        config.plugins.TSweather.weather_location = ConfigText(default="bh-BH", visible_width=250, fixed_size=False)       
 except:
         trace_error()
         pass
 
 import gettext
-REDC =  '\033[31m'
+REDC = '\033[31m'
 ENDC = '\033[m'
 
 def cprint(text):
-    print(REDC+"[RaedQuickSignal] "+text+ENDC)
+    print(REDC + "[RaedQuickSignal] " + text + ENDC)
 
 def downloadFile(url, filePath):
     try:
@@ -201,7 +201,7 @@ def getcities(weather_location):
                 return []
         try:
                 regx = '''<a href="(.*?)"><img src=".*?" border="0" alt=".*?"></a>'''
-                match = re.findall(str(regx), str(data), re.M|re.I)
+                match = re.findall(str(regx), str(data), re.M | re.I)
                 cities = []
                 for cityURL in match:
                     if 'wiki' in cityURL:
@@ -243,7 +243,7 @@ class WeatherLocationChoiceList(Screen):
         def createChoiceList(self):
                 self.timer.stop()
                 list = []
-                list=getcities(self.country)
+                list = getcities(self.country)
                 self["choicelist"].l.setList(list)
 
         def control_xml(self, result, retval, extra_args):
@@ -257,7 +257,7 @@ class WeatherLocationChoiceList(Screen):
 
         def get_xmlfile(self, weather_city, weather_location):
                 degreetype = config.plugins.TSweather.degreetype.value
-                weather_city=weather_city.replace(" ", "+")
+                weather_city = weather_city.replace(" ", "+")
                 url = 'http://weather.service.msn.com/data.aspx?weadegreetype=%s&culture=%s&weasearchstr=%s&src=outlook' % (degreetype, weather_location, weather_city)
                 file_name = '/tmp/weathermsn.xml'
                 try:
@@ -274,8 +274,8 @@ class WeatherLocationChoiceList(Screen):
                         if os_path.exists('/tmp/weathermsn.xml'):
                                 os_remove('/tmp/weathermsn.xml')
                         returnValue = self["choicelist"].l.getCurrentSelection()
-                        countryCode=self.country.lower()+"-"+self.country.upper()
-                        if self.get_xmlfile(returnValue, countryCode)==False:
+                        countryCode = self.country.lower() + "-" + self.country.upper()
+                        if self.get_xmlfile(returnValue, countryCode) == False:
                                 self.session.open(MessageBox, _("Sorry, your city is not available."), MessageBox.TYPE_ERROR)
                                 return 
                         if not fileExists('/tmp/weathermsn.xml'):
@@ -294,8 +294,8 @@ class WeatherLocationChoiceList(Screen):
                         if os_path.exists('/tmp/weathermsn.xml'):
                                 os_remove('/tmp/weathermsn.xml')
                         returnValue = self["choicelist"].l.getCurrentSelection()
-                        countryCode=self.country.lower()+"-"+self.country.upper()
-                        if self.get_xmlfile(returnValue, countryCode)==False:
+                        countryCode = self.country.lower() + "-" + self.country.upper()
+                        if self.get_xmlfile(returnValue, countryCode) == False:
                                 self.session.open(MessageBox, _("Sorry, your city is not available."), MessageBox.TYPE_ERROR)
                                 return 
                         if not fileExists('/tmp/weathermsn.xml'):
@@ -435,7 +435,7 @@ class RaedQuickSignalScreen(Screen):
                          "left": self.keyLeft,
                          "right": self.keyRight,
                     })
-                shown=True
+                shown = True
                 self.onLayoutFinish.append(self.layoutFinished)
 
         def layoutFinished(self):
@@ -553,18 +553,18 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
 
         def keyOk(self):
             countriesFile = resolveFilename(SCOPE_PLUGINS, 'Extensions/RaedQuickSignal/countries')
-            countries=open(countriesFile).readlines()
-            clist=[]
+            countries = open(countriesFile).readlines()
+            clist = []
             for country in countries:
-                countryCode, countryName=country.split(",")
+                countryCode, countryName = country.split(",")
                 clist.append((countryName, countryCode))
             from Screens.ChoiceBox import ChoiceBox
             self.session.openWithCallback(self.choicesback, ChoiceBox, _('select your country'), clist)
 
         def choicesback(self, select):
                 if select:
-                    self.country=select[1]
-                    config.plugins.TSweather.weather_location.value=self.country.lower()+"-"+self.country.upper()
+                    self.country = select[1]
+                    config.plugins.TSweather.weather_location.value = self.country.lower() + "-" + self.country.upper()
                     config.plugins.TSweather.weather_location.save()
                     self.session.openWithCallback(self.citiesback, WeatherLocationChoiceList, self.country)
                     

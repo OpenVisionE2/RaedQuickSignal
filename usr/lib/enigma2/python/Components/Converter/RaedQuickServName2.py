@@ -96,7 +96,7 @@ class RaedQuickServName2(Converter, object):
                                         s = servicelist.getNext()
                                         if not s.valid():
                                                 break
-                                        if not (s.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
+                                        if not (s.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)):
                                                 if type:
                                                         if s.flags & eServiceReference.isGroup:
                                                                 istype = True
@@ -111,7 +111,7 @@ class RaedQuickServName2(Converter, object):
                 serviceHandler = eServiceCenter.getInstance()
                 if not config.usage.multibouquet.value:
                         service_types_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 134) || (type == 195)'
-                        rootstr = '%s FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet'%(service_types_tv)
+                        rootstr = '%s FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet' % (service_types_tv)
                 else:
                         rootstr = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
                 bouquet = eServiceReference(rootstr)
@@ -138,7 +138,7 @@ class RaedQuickServName2(Converter, object):
                                         s = servicelist.getNext()
                                         if not s.valid():
                                                 break
-                                        if not (s.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
+                                        if not (s.flags & (eServiceReference.isMarker | eServiceReference.isDirectory)):
                                                 num += 1
                                                 if s == ref:
                                                         return s, num
@@ -196,7 +196,7 @@ class RaedQuickServName2(Converter, object):
                         from Screens.ChannelSelection import service_types_radio, service_types_tv
                         typestr = ref.getData(0) in (2, 10) and service_types_radio or service_types_tv
                         pos = typestr.rfind(':')
-                        rootstr = '%s (channelID == %08x%04x%04x) && %s FROM PROVIDERS ORDER BY name' %(typestr[:pos+1], ref.getUnsignedData(4), ref.getUnsignedData(2), ref.getUnsignedData(3), typestr[pos+1:])
+                        rootstr = '%s (channelID == %08x%04x%04x) && %s FROM PROVIDERS ORDER BY name' % (typestr[:pos + 1], ref.getUnsignedData(4), ref.getUnsignedData(2), ref.getUnsignedData(3), typestr[pos + 1:])
                         provider_root = eServiceReference(rootstr)
                         serviceHandler = eServiceCenter.getInstance()
                         providerlist = serviceHandler.list(provider_root)
@@ -264,11 +264,11 @@ class RaedQuickServName2(Converter, object):
                                            result += 'N/A'
                         elif f == 'F':  # %F - frequency (dvb-s/s2/c/t) in KHz
                                    if type in ('DVB-S', 'DVB-C', 'DVB-T'):
-                                           result += '%d'%(self.tpdata.get('frequency', 0) // 1000)
+                                           result += '%d' % (self.tpdata.get('frequency', 0) // 1000)
                         elif f == 'f':  # %f - fec_inner (dvb-s/s2/c/t)
                                    if type in ('DVB-S', 'DVB-C'):
                                            x = self.tpdata.get('fec_inner', 15)
-                                           result += x in range(10)+[15] and {0:'Auto',1:'1/2',2:'2/3',3:'3/4',4:'5/6',5:'7/8',6:'8/9',7:'3/5',8:'4/5',9:'9/10',15:'None'}[x] or ''
+                                           result += x in range(10) + [15] and {0:'Auto',1:'1/2',2:'2/3',3:'3/4',4:'5/6',5:'7/8',6:'8/9',7:'3/5',8:'4/5',9:'9/10',15:'None'}[x] or ''
                                    elif type == 'DVB-T':
                                            x = self.tpdata.get('code_rate_lp', 5)
                                            result += x in range(6) and {0:'1/2',1:'2/3',2:'3/4',3:'5/6',4:'7/8',5:'Auto'}[x] or ''
@@ -278,7 +278,7 @@ class RaedQuickServName2(Converter, object):
                         elif f == 'O':  # %O - orbital_position (dvb-s/s2)
                                    if type == 'DVB-S':
                                            x = self.tpdata.get('orbital_position', 0)
-                                           result += x > 1800 and "%d.%d°W"%((3600-x)/10, (3600-x)%10) or "%d.%d°E"%(x/10, x%10)
+                                           result += x > 1800 and "%d.%d°W" % ((3600 - x) / 10, (3600 - x) % 10) or "%d.%d°E" % (x / 10, x % 10)
                                    elif type == 'Iptv':
                                            result += 'Stream'
                         elif f == 'M':  # %M - modulation (dvb-s/s2/c)
@@ -293,7 +293,7 @@ class RaedQuickServName2(Converter, object):
                                            result += x in range(4) and {0:'H',1:'V',2:'L',3:'R'}[x] or '?'
                         elif f == 'Y':  # %Y - symbol_rate (dvb-s/s2/c)
                                    if type in ('DVB-C', 'DVB-S'):
-                                           result += '%d'%(self.tpdata.get('symbol_rate', 0) // 1000)
+                                           result += '%d' % (self.tpdata.get('symbol_rate', 0) // 1000)
                         elif f == 'r':  # %r - rolloff (dvb-s2)
                                    if not self.isStream:
                                            x = self.tpdata.get('rolloff')
@@ -350,7 +350,7 @@ class RaedQuickServName2(Converter, object):
                                         from Components.NimManager import nimmanager
                                         return str(nimmanager.getSatDescription(orbpos))
                                 except:
-                                        dir = ref.flags & (eServiceReference.isDirectory|eServiceReference.isMarker)
+                                        dir = ref.flags & (eServiceReference.isDirectory | eServiceReference.isMarker)
                                         if not dir:
                                                 refString = ref.toString().lower()
                                                 if refString.startswith("-1"):
@@ -360,7 +360,7 @@ class RaedQuickServName2(Converter, object):
                                                 elif refString.startswith("4097:"):
                                                         return _("Internet")
                                                 else:
-                                                        return orbpos > 1800 and "%d.%d°W"%((3600-orbpos)/10, (3600-orbpos)%10) or "%d.%d°E"%(orbpos/10, orbpos%10)
+                                                        return orbpos > 1800 and "%d.%d°W" % ((3600 - orbpos) / 10, (3600 - orbpos) % 10) or "%d.%d°E" % (orbpos / 10, orbpos % 10)
                 return ""
 
         def getIPTVProvider(self, refstr):
@@ -643,7 +643,7 @@ class RaedQuickServName2(Converter, object):
                                         else:
                                                 ret += self.getTransponderInfo(info, ref, f)
                                 ret += line[1:]
-                        return '%s'%(ret.replace('N/A', '').strip())
+                        return '%s' % (ret.replace('N/A', '').strip())
 
         text = property(getText)
 

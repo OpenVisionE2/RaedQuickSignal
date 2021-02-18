@@ -52,7 +52,7 @@ else:
 weather_city = config.plugins.TSweather.city.value
 degreetype = config.plugins.TSweather.degreetype.value
 windtype = config.plugins.TSweather.windtype.value
-weather_location =  config.plugins.TSweather.weather_location.value
+weather_location = config.plugins.TSweather.weather_location.value
 
 def trace_error():
     import sys
@@ -65,9 +65,9 @@ def trace_error():
 
 def logdata(label_name='', data=None):
     try:
-        data=str(data)
+        data = str(data)
         fp = open('/tmp/RaedQuickSignal.log', 'a')
-        fp.write(str(label_name) + ': ' + data+"\n")
+        fp.write(str(label_name) + ': ' + data + "\n")
         fp.close()
     except:
         trace_error()    
@@ -545,7 +545,7 @@ class RaedQuickWeather(Poll, Converter, object):
 			}
 #
 		if fileExists("/tmp/weathermsn.xml"):
-			if int((time.time() - os.stat("/tmp/weathermsn.xml").st_mtime)/60) >= time_update:
+			if int((time.time() - os.stat("/tmp/weathermsn.xml").st_mtime) / 60) >= time_update:
 				self.get_xmlfile()
 		else:
 			self.get_xmlfile()
@@ -565,8 +565,8 @@ class RaedQuickWeather(Poll, Converter, object):
 					timezone = '%s' % float(line.split('timezone')[1].split('"')[1])
 					msnweather['Latitude'] = line.split(' lat')[1].split('"')[1]
 					msnweather['Longitude'] = line.split(' long')[1].split('"')[1]
-					latitude = '%s' %  line.split(' lat')[1].split('"')[1].replace(',', '.')
-					longitude = '%s' %  line.split(' long')[1].split('"')[1].replace(',', '.')
+					latitude = '%s' % line.split(' lat')[1].split('"')[1].replace(',', '.')
+					longitude = '%s' % line.split(' long')[1].split('"')[1].replace(',', '.')
 				if "<current" in line:
 					if not line.split('temperature')[1].split('"')[1][0] == '-' and not line.split('temperature')[1].split('"')[1][0] == '0':
 						msnweather['Temp'] = '+' + line.split('temperature')[1].split('"')[1] + '%s%s' % (TMP176, degreetype)
@@ -592,9 +592,9 @@ class RaedQuickWeather(Poll, Converter, object):
 						msnweather['Windspeed'] = _('%.01f m/s') % (float(line.split('windspeed')[1].split('"')[1].split(' ')[0]) * 0.45)
 # ft/s
 					elif windtype == 'fts' and line.split('windspeed')[1].split('"')[1].split(' ')[1] == 'm/s':
-						msnweather['Windspeed']= _('%.01f ft/s') % (float(line.split('windspeed')[1].split('"')[1].split(' ')[0]) * 3.28)
+						msnweather['Windspeed'] = _('%.01f ft/s') % (float(line.split('windspeed')[1].split('"')[1].split(' ')[0]) * 3.28)
 					elif windtype == 'fts' and line.split('windspeed')[1].split('"')[1].split(' ')[1] == 'km/h':
-						msnweather['Windspeed']= _('%.01f ft/s') % (float(line.split('windspeed')[1].split('"')[1].split(' ')[0]) * 0.91)
+						msnweather['Windspeed'] = _('%.01f ft/s') % (float(line.split('windspeed')[1].split('"')[1].split(' ')[0]) * 0.91)
 					elif windtype == 'ms' and line.split('windspeed')[1].split('"')[1].split(' ')[1] == 'mph':
 						msnweather['Windspeed'] = _('%.01f ft/s') % (float(line.split('windspeed')[1].split('"')[1].split(' ')[0]) * 1.47)
 # mp/h
@@ -848,7 +848,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -924,7 +924,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -1005,7 +1005,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -1106,7 +1106,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -1210,7 +1210,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -1292,7 +1292,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -1369,7 +1369,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -1534,7 +1534,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -1542,7 +1542,7 @@ class RaedQuickWeather(Poll, Converter, object):
 			RA = RA + 2 * PI
 		DEC = math.asin(math.sin(PLat * DEG2RAD) * math.cos(EPS * DEG2RAD) + math.cos(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD) * math.sin(PLong * DEG2RAD)) * RAD2DEG # declination
 		TH = ST - RA
-		Z  = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # косинус зенитного угла
+		Z = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # косинус зенитного угла
 		H = 90 - Z # угол места
 		AZ = math.atan2(math.sin(TH * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(lat * DEG2RAD), math.sin(H * DEG2RAD) * math.sin(lat * DEG2RAD) - math.sin(DEC * DEG2RAD)) * RAD2DEG + 180 # азимут + 180
 		P1A = round(AZ, 1)
@@ -1574,7 +1574,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -1582,7 +1582,7 @@ class RaedQuickWeather(Poll, Converter, object):
 			RA = RA + 2 * PI
 		DEC = math.asin(math.sin(PLat * DEG2RAD) * math.cos(EPS * DEG2RAD) + math.cos(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD) * math.sin(PLong * DEG2RAD)) * RAD2DEG # гdeclination
 		TH = ST - RA
-		Z  = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # косинус зенитного угла
+		Z = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # косинус зенитного угла
 		H = 90 - Z # угол места
 		AZ = math.atan2(math.sin(TH * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(lat * DEG2RAD), math.sin(H * DEG2RAD) * math.sin(lat * DEG2RAD) - math.sin(DEC * DEG2RAD)) * RAD2DEG + 180 # азимут + 180
 		P2A = round(AZ, 1)
@@ -1619,7 +1619,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -1627,7 +1627,7 @@ class RaedQuickWeather(Poll, Converter, object):
 			RA = RA + 2 * PI
 		DEC = math.asin(math.sin(PLat * DEG2RAD) * math.cos(EPS * DEG2RAD) + math.cos(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD) * math.sin(PLong * DEG2RAD)) * RAD2DEG # declination
 		TH = ST - RA
-		Z  = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # косинус зенитного угла
+		Z = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # косинус зенитного угла
 		H = 90 - Z # угол места
 		AZ = math.atan2(math.sin(TH * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(lat * DEG2RAD), math.sin(H * DEG2RAD) * math.sin(lat * DEG2RAD) - math.sin(DEC * DEG2RAD)) * RAD2DEG + 180 # азимут + 180
 		P4A = round(AZ, 1)
@@ -1684,7 +1684,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -1692,7 +1692,7 @@ class RaedQuickWeather(Poll, Converter, object):
 			RA = RA + 2 * PI
 		DEC = math.asin(math.sin(PLat * DEG2RAD) * math.cos(EPS * DEG2RAD) + math.cos(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD) * math.sin(PLong * DEG2RAD)) * RAD2DEG # declination
 		TH = ST - RA
-		Z  = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # cosine of the zenith angle
+		Z = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # cosine of the zenith angle
 		H = 90 - Z # угол места
 		AZ = math.atan2(math.sin(TH * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(lat * DEG2RAD), math.sin(H * DEG2RAD) * math.sin(lat * DEG2RAD) - math.sin(DEC * DEG2RAD)) * RAD2DEG + 180 # azimuth + 180
 		P5A = round(AZ, 1)
@@ -1752,7 +1752,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -1760,7 +1760,7 @@ class RaedQuickWeather(Poll, Converter, object):
 			RA = RA + 2 * PI
 		DEC = math.asin(math.sin(PLat * DEG2RAD) * math.cos(EPS * DEG2RAD) + math.cos(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD) * math.sin(PLong * DEG2RAD)) * RAD2DEG # declination
 		TH = ST - RA
-		Z  = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # cosine of the zenith angle
+		Z = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # cosine of the zenith angle
 		H = 90 - Z # угол места
 		AZ = math.atan2(math.sin(TH * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(lat * DEG2RAD), math.sin(H * DEG2RAD) * math.sin(lat * DEG2RAD) - math.sin(DEC * DEG2RAD)) * RAD2DEG + 180 # azimuth + 180
 		P6A = round(AZ, 1)
@@ -1787,7 +1787,7 @@ class RaedQuickWeather(Poll, Converter, object):
 
 		LP = LP7 + EL
 		M0 = math.fmod(141.050 + 0.011698 * (JDN - 2451545), 360) # avg anomaly
-		MP = M0 + EP7 - EP7 * math.sin(M0 * DEG2RAD)/(-1.0 + EP7 * math.cos(M0 * DEG2RAD)) # Kepler equation
+		MP = M0 + EP7 - EP7 * math.sin(M0 * DEG2RAD) / (-1.0 + EP7 * math.cos(M0 * DEG2RAD)) # Kepler equation
 		DP = (19.21814 * (1 - EP7 * EP7)) / (EP7 * math.cos((MP + LP) * DEG2RAD) + 1) # distance to the sun in a.u.
 		# heliocentric coordinates
 		XP = DP * (math.cos(WP7 * DEG2RAD) * math.cos((wP7 + MP) * DEG2RAD) - math.sin(WP7 * DEG2RAD) * math.cos(IP7 * DEG2RAD) * math.sin((wP7 + MP) * DEG2RAD))
@@ -1798,7 +1798,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -1806,7 +1806,7 @@ class RaedQuickWeather(Poll, Converter, object):
 			RA = RA + 2 * PI
 		DEC = math.asin(math.sin(PLat * DEG2RAD) * math.cos(EPS * DEG2RAD) + math.cos(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD) * math.sin(PLong * DEG2RAD)) * RAD2DEG # declination
 		TH = ST - RA
-		Z  = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # cosine of the zenith angle
+		Z = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # cosine of the zenith angle
 		H = 90 - Z # угол места
 		AZ = math.atan2(math.sin(TH * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(lat * DEG2RAD), math.sin(H * DEG2RAD) * math.sin(lat * DEG2RAD) - math.sin(DEC * DEG2RAD)) * RAD2DEG + 180 # azimuth + 180
 		P7A = round(AZ, 1)
@@ -1840,7 +1840,7 @@ class RaedQuickWeather(Poll, Converter, object):
 		YP = YP - YE
 		ZP = ZP
 		# ecliptic coordinates
-		PLong =  math.atan2(YP, XP) * RAD2DEG
+		PLong = math.atan2(YP, XP) * RAD2DEG
 		PLat = math.asin(ZP / math.sqrt(XP * XP + YP * YP + ZP * ZP)) * RAD2DEG
 
 		RA = math.atan2((math.sin(PLong * DEG2RAD) * math.cos(EPS * DEG2RAD) - math.tan(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD)), math.cos(PLong * DEG2RAD)) * RAD2DEG # right ascension
@@ -1848,7 +1848,7 @@ class RaedQuickWeather(Poll, Converter, object):
 			RA = RA + 2 * PI
 		DEC = math.asin(math.sin(PLat * DEG2RAD) * math.cos(EPS * DEG2RAD) + math.cos(PLat * DEG2RAD) * math.sin(EPS * DEG2RAD) * math.sin(PLong * DEG2RAD)) * RAD2DEG # declination
 		TH = ST - RA
-		Z  = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # cosine of the zenith angle
+		Z = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # cosine of the zenith angle
 		H = 90 - Z # угол места
 		AZ = math.atan2(math.sin(TH * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(lat * DEG2RAD), math.sin(H * DEG2RAD) * math.sin(lat * DEG2RAD) - math.sin(DEC * DEG2RAD)) * RAD2DEG + 180 # azimuth + 180
 		P8A = round(AZ, 1)
@@ -1928,7 +1928,7 @@ class RaedQuickWeather(Poll, Converter, object):
 			RA = RA + 2 * PI
 		DEC = math.asin(math.sin(MLat * DEG2RAD) * math.cos(EPS * DEG2RAD) + math.cos(MLat * DEG2RAD) * math.sin(EPS * DEG2RAD) * math.sin(MLong * DEG2RAD)) * RAD2DEG # declination
 		TH = ST - RA
-		Z  = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # cosine of the zenith angle
+		Z = math.acos(math.sin(lat * DEG2RAD) * math.sin(DEC * DEG2RAD) + math.cos(lat * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(TH * DEG2RAD)) * RAD2DEG # cosine of the zenith angle
 		H = 90 - Z # elevation
 		AZ = math.atan2(math.sin(TH * DEG2RAD) * math.cos(DEC * DEG2RAD) * math.cos(lat * DEG2RAD), math.sin(H * DEG2RAD) * math.sin(lat * DEG2RAD) - math.sin(DEC * DEG2RAD)) * RAD2DEG + 180 # azimuth + 180
 		MA = round(AZ, 1)

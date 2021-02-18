@@ -41,10 +41,10 @@ import os
 
 try:
     from Components.Converter.Poll import PollConverter as Poll
-    dreamos=True
+    dreamos = True
 except:
     from Components.Converter.Poll import Poll
-    dreamos=False
+    dreamos = False
 
 #searchPaths = []
 
