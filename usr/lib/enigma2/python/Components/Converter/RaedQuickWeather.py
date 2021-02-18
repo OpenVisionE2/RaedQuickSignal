@@ -436,112 +436,112 @@ class RaedQuickWeather(Poll, Converter, object):
 		min = float(strftime('%M'))
 		sec = float(strftime('%S'))
 		info, weze = 'n/a', ''
-		msnweather = {'Vfd': '',\
-			'Date': '',\
-			'Shortdate': '',\
-			'Day': '',\
-			'Shortday': '',\
-			'Location': '',\
-			'Timezone': '',\
-			'Latitude': '',\
-			'Longitude': '',\
-			'Julianday': '',\
-			'Sunrise': '',\
-			'Sunset': '',\
-			'Solstice': '',\
-			'Mercuryrise': '',\
-			'Mercuryset': '',\
-			'Mercuryculmination': '',\
-			'Mercuryazimuth': '',\
-			'Venusrise': '',\
-			'Venusset': '',\
-			'Venusculmination': '',\
-			'Venusazimuth': '',\
-			'Marsrise': '',\
-			'Marsset': '',\
-			'Marsculmination': '',\
-			'Marsazimuth': '',\
-			'Jupiterrise': '',\
-			'Jupiterset': '',\
-			'Jupiterculmination': '',\
-			'Jupiterazimuth': '',\
-			'Saturnrise': '',\
-			'Saturnset': '',\
-			'Saturnculmination': '',\
-			'Saturnazimuth': '',\
-			'Uranusrise': '',\
-			'Uranusset': '',\
-			'Uranusculmination': '',\
-			'Uranusazimuth': '',\
-			'Neptunerise': '',\
-			'Neptuneset': '',\
-			'Neptuneculmination': '',\
-			'Neptuneazimuth': '',\
-			'Moonrise': '',\
-			'Moonset': '',\
-			'Moonculmination': '',\
-			'Moondist': '',\
-			'Moonazimuth': '',\
-			'Moonphase': '',\
-			'Moonlight': '',\
-			'PiconMoon': '1',\
-			'Temp': '',\
-			'Picon': '',\
-			'Skytext': '',\
-			'Feelslike': '',\
-			'Humidity': '',\
-			'Wind': '',\
-			'Windspeed': '',\
-			'Date0': '',\
-			'Shortdate0': '',\
-			'Day0': '',\
-			'Shortday0': '',\
-			'Temp0': '',\
-			'Lowtemp0': '',\
-			'Hightemp0': '',\
-			'Picon0': '',\
-			'Skytext0': '',\
-			'Precip0': '',\
-			'Date1': '',\
-			'Shortdate1': '',\
-			'Day1': '',\
-			'Shortday1': '',\
-			'Temp1': '',\
-			'Lowtemp1': '',\
-			'Hightemp1': '',\
-			'Picon1': '',\
-			'Skytext1': '',\
-			'Precip1': '',\
-			'Date2': '',\
-			'Shortdate2': '',\
-			'Day2': '',\
-			'Shortday2': '',\
-			'Temp2': '',\
-			'Lowtemp2': '',\
-			'Hightemp2': '',\
-			'Picon2': '',\
-			'Skytext2': '',\
-			'Precip2': '',\
-			'Date3': '',\
-			'Shortdate3': '',\
-			'Day3': '',\
-			'Shortday3': '',\
-			'Temp3': '',\
-			'Lowtemp3': '',\
-			'Hightemp3': '',\
-			'Picon3': '',\
-			'Skytext3': '',\
-			'Precip3': '',\
-			'Date4': '',\
-			'Shortdate4': '',\
-			'Day4': '',\
-			'Shortday4': '',\
-			'Temp4': '',\
-			'Lowtemp4': '',\
-			'Hightemp4': '',\
-			'Picon4': '',\
-			'Skytext4': '',\
-			'Precip4': '',\
+		msnweather = {'Vfd': '',
+			'Date': '',
+			'Shortdate': '',
+			'Day': '',
+			'Shortday': '',
+			'Location': '',
+			'Timezone': '',
+			'Latitude': '',
+			'Longitude': '',
+			'Julianday': '',
+			'Sunrise': '',
+			'Sunset': '',
+			'Solstice': '',
+			'Mercuryrise': '',
+			'Mercuryset': '',
+			'Mercuryculmination': '',
+			'Mercuryazimuth': '',
+			'Venusrise': '',
+			'Venusset': '',
+			'Venusculmination': '',
+			'Venusazimuth': '',
+			'Marsrise': '',
+			'Marsset': '',
+			'Marsculmination': '',
+			'Marsazimuth': '',
+			'Jupiterrise': '',
+			'Jupiterset': '',
+			'Jupiterculmination': '',
+			'Jupiterazimuth': '',
+			'Saturnrise': '',
+			'Saturnset': '',
+			'Saturnculmination': '',
+			'Saturnazimuth': '',
+			'Uranusrise': '',
+			'Uranusset': '',
+			'Uranusculmination': '',
+			'Uranusazimuth': '',
+			'Neptunerise': '',
+			'Neptuneset': '',
+			'Neptuneculmination': '',
+			'Neptuneazimuth': '',
+			'Moonrise': '',
+			'Moonset': '',
+			'Moonculmination': '',
+			'Moondist': '',
+			'Moonazimuth': '',
+			'Moonphase': '',
+			'Moonlight': '',
+			'PiconMoon': '1',
+			'Temp': '',
+			'Picon': '',
+			'Skytext': '',
+			'Feelslike': '',
+			'Humidity': '',
+			'Wind': '',
+			'Windspeed': '',
+			'Date0': '',
+			'Shortdate0': '',
+			'Day0': '',
+			'Shortday0': '',
+			'Temp0': '',
+			'Lowtemp0': '',
+			'Hightemp0': '',
+			'Picon0': '',
+			'Skytext0': '',
+			'Precip0': '',
+			'Date1': '',
+			'Shortdate1': '',
+			'Day1': '',
+			'Shortday1': '',
+			'Temp1': '',
+			'Lowtemp1': '',
+			'Hightemp1': '',
+			'Picon1': '',
+			'Skytext1': '',
+			'Precip1': '',
+			'Date2': '',
+			'Shortdate2': '',
+			'Day2': '',
+			'Shortday2': '',
+			'Temp2': '',
+			'Lowtemp2': '',
+			'Hightemp2': '',
+			'Picon2': '',
+			'Skytext2': '',
+			'Precip2': '',
+			'Date3': '',
+			'Shortdate3': '',
+			'Day3': '',
+			'Shortday3': '',
+			'Temp3': '',
+			'Lowtemp3': '',
+			'Hightemp3': '',
+			'Picon3': '',
+			'Skytext3': '',
+			'Precip3': '',
+			'Date4': '',
+			'Shortdate4': '',
+			'Day4': '',
+			'Shortday4': '',
+			'Temp4': '',
+			'Lowtemp4': '',
+			'Hightemp4': '',
+			'Picon4': '',
+			'Skytext4': '',
+			'Precip4': '',
 			}
 #
 		if fileExists("/tmp/weathermsn.xml"):
@@ -989,7 +989,7 @@ class RaedQuickWeather(Poll, Converter, object):
 			+ 0.00136 * math.cos((2 * MP3 - 4 * MP4 + 154.093) * DEG2RAD)\
 			+ 0.00104 * math.cos((MP5 + 17.618) * DEG2RAD)
 
-		CP = (- 0.01133 * math.sin((3 * MP5 - 8 * MP4 + 4 * MP3) * DEG2RAD)\
+		CP = (- 0.01133 * math.sin((3 * MP5 - 8 * MP4 + 4 * MP3) * DEG2RAD)
 			- 0.00933 * math.cos((3 * MP5 - 8 * MP4 + 4 * MP3) * DEG2RAD)) # center equation
 
 		LP = LP4 + EL + CP
@@ -1603,7 +1603,7 @@ class RaedQuickWeather(Poll, Converter, object):
 			+ 0.00136 * math.cos((2 * MP3 - 4 * MP4 + 154.093) * DEG2RAD)\
 			+ 0.00104 * math.cos((MP5 + 17.618) * DEG2RAD)
 
-		CP = (- 0.01133 * math.sin((3 * MP5 - 8 * MP4 + 4 * MP3) * DEG2RAD)\
+		CP = (- 0.01133 * math.sin((3 * MP5 - 8 * MP4 + 4 * MP3) * DEG2RAD)
 			- 0.00933 * math.cos((3 * MP5 - 8 * MP4 + 4 * MP3) * DEG2RAD)) # center equation
 
 		LP = LP4 + EL + CP
