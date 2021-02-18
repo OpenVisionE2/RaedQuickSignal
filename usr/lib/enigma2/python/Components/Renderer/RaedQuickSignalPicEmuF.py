@@ -4,11 +4,11 @@
 #EDit BY RAED To QuickSignal 2018
 
 from __future__ import print_function
-from enigma import getDesktop, eServiceCenter, eServiceReference, iServiceInformation, iPlayableService, eDVBFrontendParametersSatellite, eDVBFrontendParametersCable, ePixmap, eTimer 
-from Tools.LoadPixmap import LoadPixmap 
-from Components.Pixmap import Pixmap 
+from enigma import getDesktop, eServiceCenter, eServiceReference, iServiceInformation, iPlayableService, eDVBFrontendParametersSatellite, eDVBFrontendParametersCable, ePixmap, eTimer
+from Tools.LoadPixmap import LoadPixmap
+from Components.Pixmap import Pixmap
 from Components.Renderer.Renderer import Renderer
-from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, resolveFilename 
+from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.config import config
 from Components.Element import cached
 import os
@@ -19,7 +19,7 @@ from Components.Converter.Poll import Poll
 class RaedQuickSignalPicEmuF(Renderer, Poll):
         __module__ = __name__
         searchPaths = ('/data/%s/', '/usr/share/enigma2/%s/', '/usr/lib/enigma2/python/Plugins/Extensions/%s/', '/media/sde1/%s/', '/media/cf/%s/', '/media/sdd1/%s/', '/media/hdd/%s/', '/media/usb/%s/', '/media/ba/%s/', '/mnt/ba/%s/', '/media/sda/%s/', '/etc/%s/')
-        
+
         def __init__(self):
                 Poll.__init__(self)
                 Renderer.__init__(self)
@@ -30,7 +30,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                 self.nameCache = {}
                 self.pngname = ''
                 self.picon_default = "picon_default.png"
-                
+
         def applySkin(self, desktop, parent):
                 attribs = []
                 for (attrib, value,) in self.skinAttributes:
@@ -40,10 +40,10 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                                 self.picon_default = value
                         else:
                                 attribs.append((attrib, value))
-                                
+
                 self.skinAttributes = attribs
                 return Renderer.applySkin(self, desktop, parent)
-                
+
         GUI_WIDGET = ePixmap
 
         @cached
@@ -59,13 +59,13 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                 nameser = []
                 if not info:
                         return ""
-                # Alternative SoftCam Manager 
-                if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/plugin.pyo"): 
-                        if config.plugins.AltSoftcam.actcam.value != "none": 
-                                return config.plugins.AltSoftcam.actcam.value 
-                        else: 
+                # Alternative SoftCam Manager
+                if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/plugin.pyo"):
+                        if config.plugins.AltSoftcam.actcam.value != "none":
+                                return config.plugins.AltSoftcam.actcam.value
+                        else:
                                 return None
-                #  GlassSysUtil 
+                #  GlassSysUtil
                 elif fileExists("/tmp/ucm_cam.info"):
                         return open("/tmp/ucm_cam.info").read()
                 # OV
@@ -93,7 +93,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                         return ""
                 else:
                         return None
-                        
+
                 if serlist != None:
                         try:
                                 cardserver = ""
@@ -115,9 +115,9 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                                 pass
                 else:
                         emu = " "
-                        
+
                 return "%s %s" % (cardserver.split('\n')[0], emu.split('\n')[0])
-                
+
         text = property(getText)
 
         def changed(self, what):
@@ -185,9 +185,9 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
 
         def int2hex(self, int):
             return ("%x" % int)
-               
+
         def findPicon(self, serviceName):
- 
+
                 for path in self.searchPaths:
                         pngname = (((path % self.path) + serviceName) + '.png')
                         if fileExists(pngname):

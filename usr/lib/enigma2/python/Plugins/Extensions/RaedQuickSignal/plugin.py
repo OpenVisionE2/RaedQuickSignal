@@ -77,7 +77,7 @@ def logdata(label_name='', data=None):
         fp.write(str(label_name) + ': ' + data + "\n")
         fp.close()
     except:
-        trace_error()    
+        trace_error()
         pass
 
 
@@ -141,8 +141,8 @@ config.plugins.RaedQuickSignal.piconpath = ConfigSelection(default="PLUGIN", cho
 config.plugins.RaedQuickSignal.refreshInterval = ConfigNumber(default=30) #in minutes
 ##############################################################################
 try:
-        config.plugins.TSweather = ConfigSubsection()       
-        config.plugins.TSweather.city = ConfigText(default="manama", visible_width=250, fixed_size=False)       
+        config.plugins.TSweather = ConfigSubsection()
+        config.plugins.TSweather.city = ConfigText(default="manama", visible_width=250, fixed_size=False)
         config.plugins.TSweather.windtype = ConfigSelection(default="ms", choices=[
                 ("ms", _("m/s")),
                 ("fts", _("ft/s")),
@@ -152,7 +152,7 @@ try:
         config.plugins.TSweather.degreetype = ConfigSelection(default="C", choices=[
                 ("C", _("Celsius")),
                 ("F", _("Fahrenheit"))])
-        config.plugins.TSweather.weather_location = ConfigText(default="bh-BH", visible_width=250, fixed_size=False)       
+        config.plugins.TSweather.weather_location = ConfigText(default="bh-BH", visible_width=250, fixed_size=False)
 except:
         trace_error()
         pass
@@ -172,7 +172,7 @@ def downloadFile(url, filePath):
         urlretrieve(url, filePath)
         return True
         req = compat_Request(url)
-        response = compat_urlopen(req)        
+        response = compat_urlopen(req)
         print("response.read", response.read())
         output = open(filePath, 'wb')
         output.write(response.read())
@@ -218,7 +218,7 @@ def getcities(weather_location):
                 for cityURL in match:
                     if 'wiki' in cityURL:
                             continue
-                    cityName = os.path.split(cityURL)[1].replace(".html", "")    
+                    cityName = os.path.split(cityURL)[1].replace(".html", "")
                     logdata('cityName', cityName)
                     if cityName in cities:
                         continue
@@ -248,7 +248,7 @@ class WeatherLocationChoiceList(Screen):
                         "cancel": self.keyCancel,
                         "red": self.keyCancel,
                 }, -1)
-                self.iConsole = iConsole()             
+                self.iConsole = iConsole()
                 self.timer = eTimer()
                 self.timer.callback.append(self.createChoiceList)
                 self.timer.start(5, False)
@@ -290,7 +290,7 @@ class WeatherLocationChoiceList(Screen):
                         countryCode = self.country.lower() + "-" + self.country.upper()
                         if self.get_xmlfile(returnValue, countryCode) == False:
                                 self.session.open(MessageBox, _("Sorry, your city is not available."), MessageBox.TYPE_ERROR)
-                                return 
+                                return
                         if not fileExists('/tmp/weathermsn.xml'):
                                 self.write_none()
                                 self.session.open(MessageBox, _("Sorry, your city is not available."), MessageBox.TYPE_ERROR)
@@ -310,7 +310,7 @@ class WeatherLocationChoiceList(Screen):
                         countryCode = self.country.lower() + "-" + self.country.upper()
                         if self.get_xmlfile(returnValue, countryCode) == False:
                                 self.session.open(MessageBox, _("Sorry, your city is not available."), MessageBox.TYPE_ERROR)
-                                return 
+                                return
                         if not fileExists('/tmp/weathermsn.xml'):
                                 self.write_none()
                                 self.session.open(MessageBox, _("Sorry, your city is not available."), MessageBox.TYPE_ERROR)
@@ -482,7 +482,7 @@ class RaedQuickSignalScreen(Screen):
         def setupback(self, answer=False):
                 if answer:
                         self.exit()
-                        
+
         def showsetup(self):
                 self.session.openWithCallback(self.setupback, RaedQuickSignal_setup)
 ##############################################################################
@@ -545,7 +545,7 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
                         "ok": self.keyOk
                 }, -2)
                 self.createConfigList()
-                
+
         def createConfigList(self):
                 self.list = []
                 self.currenabled_value = config.plugins.RaedQuickSignal.enabled.value
@@ -557,7 +557,7 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
                 self.list.append(getConfigListEntry(_("Select Style of Plugin"), config.plugins.RaedQuickSignal.style))
                 self.list.append(getConfigListEntry(_("Refresh interval in minutes:"), config.plugins.RaedQuickSignal.refreshInterval))
                 self.list.append(getConfigListEntry(_("Temperature unit:"), config.plugins.TSweather.degreetype))
-                self.list.append(getConfigListEntry(_("Location #press OK to change:"), config.plugins.TSweather.city))        
+                self.list.append(getConfigListEntry(_("Location #press OK to change:"), config.plugins.TSweather.city))
                 self["config"].list = self.list
                 self["config"].l.setList(self.list)
 
@@ -565,7 +565,7 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
                 for i in self["config"].list:
                         i[1].cancel()
                 self.close(False)
-                
+
         def restart(self, answer=None):
                 if answer:
                    self.session.open(TryQuitMainloop, 3)
@@ -588,11 +588,11 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
                     config.plugins.TSweather.weather_location.value = self.country.lower() + "-" + self.country.upper()
                     config.plugins.TSweather.weather_location.save()
                     self.session.openWithCallback(self.citiesback, WeatherLocationChoiceList, self.country)
-                    
+
         def citiesback(self, select):
                 if select:
                   weather_city = select
-                  weather_city.capitalize() 
+                  weather_city.capitalize()
                   config.plugins.TSweather.city.setValue(weather_city)
                   self.createConfigList()
 
@@ -601,7 +601,7 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
                         for x in self['config'].list:
                             x[1].save()
                         configfile.save()
-                        # we can not use resolveFilename(SCOPE_PLUGINS) here the keymap.xml will be not writable 
+                        # we can not use resolveFilename(SCOPE_PLUGINS) here the keymap.xml will be not writable
                         if not os_path.exists('/usr/lib64'):
                             keyfile = open("/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/keymap.xml", "w")
                         else:

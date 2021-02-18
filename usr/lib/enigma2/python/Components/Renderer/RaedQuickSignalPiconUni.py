@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # PiconUni
 # Copyright (c) 2boom 2012-15
-# 
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -36,7 +36,7 @@ from __future__ import print_function
 from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap, ePicLoad
 from Components.AVSwitch import AVSwitch
-from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS, resolveFilename 
+from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS, resolveFilename
 import os
 
 try:
@@ -57,7 +57,7 @@ except:
         #                       searchPaths.append(piconPath)
         #searchPaths.append(resolveFilename(SCOPE_CURRENT_SKIN, '%s/'))
         #searchPaths.append(resolveFilename(SCOPE_PLUGINS, '%s/'))
-        
+
 
 class RaedQuickSignalPiconUni(Renderer, Poll):
         __module__ = __name__
@@ -120,7 +120,7 @@ class RaedQuickSignalPiconUni(Renderer, Poll):
                                                         pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/picon_default.png')
                                         self.nameCache['default'] = pngname
 
-                        print("raedpngnameself.pngname", str(pngname), "**", self.pngname) 
+                        print("raedpngnameself.pngname", str(pngname), "**", self.pngname)
                         if self.pngname != pngname:
                                 print("raedpngnameself.pngname2", str(pngname), "**", self.pngname)
                                 self.picload = ePicLoad()

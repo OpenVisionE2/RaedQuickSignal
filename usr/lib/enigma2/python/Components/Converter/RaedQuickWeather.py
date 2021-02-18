@@ -72,7 +72,7 @@ def logdata(label_name='', data=None):
         fp.write(str(label_name) + ': ' + data + "\n")
         fp.close()
     except:
-        trace_error()    
+        trace_error()
         pass
 
 

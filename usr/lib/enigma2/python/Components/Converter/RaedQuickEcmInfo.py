@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# QuickEcmInfo converter (c) 2boom 2012-13 v 1.0.2 
+# QuickEcmInfo converter (c) 2boom 2012-13 v 1.0.2
 #<widget source="session.CurrentService" render="Label" position="462,153" size="50,22" font="Regular; 17" zPosition="2" backgroundColor="background1" foregroundColor="white" transparent="1">
 #    <convert type="QuickEcmInfo">ecmfile | emuname | caids</convert>
 #  </widget>
@@ -29,7 +29,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 	activecaid = 5
 	bitrate = 6
 	txtcaid = 7
-	
+
 	def __init__(self, type):
 		Converter.__init__(self, type)
 		Poll.__init__(self)
@@ -57,7 +57,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 		     self.initTimer.callback.append(self.initBitrateCalc)
 		except:
 		     self.initTimer_conn = self.initTimer.timeout.connect(self.initBitrateCalc)
-		
+
 		self.systemTxtCaids = {
 			"26": "BiSS",
 			"01": "Seca Mediaguard",
@@ -84,7 +84,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 		if v == -2:
 			return info.getInfoString(what)
 		return convert(v)
-		
+
 	def getServiceInfoString2(self, info, what, convert=lambda x: "%d" % x):
 		v = info.getInfo(what)
 		if v == -3:
@@ -97,7 +97,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 			else:
 				return ""
 		return convert(v)
-		
+
 	def clearData(self):
 		self.videoBitrate = None
 		self.audioBitrate = None
@@ -115,10 +115,10 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 			dvbnamespace = serviceInfo.getInfo(iServiceInformation.sNamespace)
 		if vpid > 0 and self.type == self.bitrate:
 			try:
-				self.videoBitrate = eBitrateCalculator(vpid, dvbnamespace, tsid, onid, 1000, 1024 * 1024) 
+				self.videoBitrate = eBitrateCalculator(vpid, dvbnamespace, tsid, onid, 1000, 1024 * 1024)
 				self.videoBitrate.callback.append(self.getVideoBitrateData)
 			except:
-				self.videoBitrate = eBitrateCalculator(vpid, dvbnamespace, tsid, onid, 1000, 1024 * 1024) 
+				self.videoBitrate = eBitrateCalculator(vpid, dvbnamespace, tsid, onid, 1000, 1024 * 1024)
 				self.videoBitrate_conn = self.videoBitrate.timeout.connect(self.getVideoBitrateData)
 		if apid > 0 and self.type == self.bitrate:
 			try:
@@ -127,7 +127,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 			except:
 				self.audioBitrate = eBitrateCalculator(apid, dvbnamespace, tsid, onid, 1000, 64 * 1024)
 				self.audioBitrate_conn = self.audioBitrate.timeout.connect(self.getAudioBitrateData)
-		
+
 	def caidstr(self):
 		caidvalue = ""
 		value = "0000"
@@ -148,7 +148,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 				except:
 					pass
 		return caidvalue
-		
+
 	@cached
 	def getText(self):
 		ecminfo = ""
@@ -157,13 +157,13 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 		info = service and service.info()
 		if not info:
 			return ""
-			
+
 		if self.type == self.vtype:
 			try:
 				return ("MPEG2", "MPEG4", "MPEG1", "MPEG4-II", "VC1", "VC1-SM", "")[info.getInfo(iServiceInformation.sVideoType)]
-			except: 
+			except:
 				return " "
-			
+
 		elif self.type == self.bitrate:
 			try:
 				audio = service and service.audioTracks()
@@ -180,15 +180,15 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 				xres = info.getInfo(iServiceInformation.sVideoWidth)
 				return "%sx%s(%s) VIDEO %s: %d kbit/s  AUDIO %s: %d kbit/s" % (str(xres), str(yres) + mode, self.getServiceInfoString(info, iServiceInformation.sFrameRate, lambda x: "%d" % ((x + 500) / 1000)), ("MPEG2", "MPEG4", "MPEG1", "MPEG4-II", "VC1", "VC1-SM", "")[info.getInfo(iServiceInformation.sVideoType)], self.video, audioTrackCodec, self.audio)
 				#return "%sx%s(%s) VIDEO %s: %d kbit/s  AUDIO %s: %d kbit/s" % (str(xres), str(yres) + mode, self.getServiceInfoString(info, iServiceInformation.sFrameRate, lambda x: "%d" % ((x+500)/1000)), ("MPEG2", "MPEG4", "MPEG1", "MPEG4-II", "VC1", "VC1-SM", "")[info.getInfo(iServiceInformation.sVideoType)], self.video,str(audio.getTrackInfo(audio.getCurrentTrack()).getDescription()), self.audio)
-			except: 
+			except:
 				return " "
 		elif self.type == self.txtcaid:
-			caidvalue = "%s" % self.systemTxtCaids.get(self.caidstr()[:2].upper()) 
+			caidvalue = "%s" % self.systemTxtCaids.get(self.caidstr()[:2].upper())
 			if caidvalue != "None":
 				return caidvalue
 			else:
 				return " "
-			
+
 		elif self.type == self.ecmfile:
 			if self.getServiceInfoString(info, iServiceInformation.sCAIDs):
 				try:
@@ -220,9 +220,9 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 		elif self.type == self.activecaid:
 			caidvalue = self.caidstr()
 			return caidvalue
-					
+
 		elif self.type == self.pids:
-			
+
 			try:
 				return "SID: %0.4X  VPID: %0.4X  APID: %0.4X  PRCPID: %0.4X  TSID: %0.4X  ONID: %0.4X" % (int(self.getServiceInfoString(info, iServiceInformation.sSID)), int(self.getServiceInfoString(info, iServiceInformation.sVideoPID)), int(self.getServiceInfoString(info, iServiceInformation.sAudioPID)), int(self.getServiceInfoString(info, iServiceInformation.sPCRPID)), int(self.getServiceInfoString(info, iServiceInformation.sTSID)), int(self.getServiceInfoString(info, iServiceInformation.sONID)))
 			except:
@@ -233,7 +233,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 						return "SID: %0.4X  VPID: %0.4X  PRCPID: %0.4X  TSID: %0.4X  ONID: %0.4X" % (int(self.getServiceInfoString(info, iServiceInformation.sSID)), int(self.getServiceInfoString(info, iServiceInformation.sVideoPID)), int(self.getServiceInfoString(info, iServiceInformation.sPCRPID)), int(self.getServiceInfoString(info, iServiceInformation.sTSID)), int(self.getServiceInfoString(info, iServiceInformation.sONID)))
 					except:
 						return ""
-			
+
 		elif self.type == self.caids:
 			array_caids = []
 			try:
@@ -245,19 +245,19 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 				ecminfo = ' '.join(str(x) for x in set(array_caids))
 			except:
 				ecminfo = " "
-					
+
 		if self.type == self.emuname:
 			serlist = None
 			camdlist = None
 			nameemu = []
 			nameser = []
-			# Alternative SoftCam Manager 
-			if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/AlternativeSoftCamManager/plugin.py")): 
-				if config.plugins.AltSoftcam.actcam.value != "none": 
-					return config.plugins.AltSoftcam.actcam.value 
-				else: 
+			# Alternative SoftCam Manager
+			if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/AlternativeSoftCamManager/plugin.py")):
+				if config.plugins.AltSoftcam.actcam.value != "none":
+					return config.plugins.AltSoftcam.actcam.value
+				else:
 					return None
-			#  GlassSysUtil 
+			#  GlassSysUtil
 			elif fileExists("/tmp/ucm_cam.info"):
 				return open("/tmp/ucm_cam.info").read()
 			# OV
@@ -287,7 +287,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 			# Unknown emu
 			else:
 				camdlist = None
-				
+
 			if serlist != None:
 				try:
 					cardserver = ""
@@ -311,9 +311,9 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 				emu = ""
 			ecminfo = "%s %s" % (cardserver.split('\n')[0], emu.split('\n')[0])
 		return ecminfo
-		
+
 	text = property(getText)
-	
+
 	def getVideoBitrateData(self, value, status):
 		if status:
 			self.video = value

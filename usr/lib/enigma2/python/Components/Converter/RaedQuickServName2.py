@@ -103,7 +103,7 @@ class RaedQuickServName2(Converter, object):
                                                                 istype = True
                                                                 return istype
                                                 else:
-                                                        if "%3a//" in s.toString().lower(): 
+                                                        if "%3a//" in s.toString().lower():
                                                                 istype = True
                                                                 return istype
                         return istype
@@ -129,7 +129,7 @@ class RaedQuickServName2(Converter, object):
                                                 isService = searchService(serviceHandler, bouquet)
                                                 if isService:
                                                         break
-                return isService 
+                return isService
 
         def getServiceNumber(self, ref):
                 def searchHelper(serviceHandler, num, bouquet):
@@ -454,7 +454,7 @@ class RaedQuickServName2(Converter, object):
                         refstr = info.getInfoString(iServiceInformation.sServiceref)
                 if refstr == None:
                         refstr = ''
-                if self.AlternativeControl: 
+                if self.AlternativeControl:
                         if ref and refstr.startswith("1:134:") and self.ref == None:
                                 nref = self.resolveAlternate(ref)
                                 if nref:
@@ -498,7 +498,7 @@ class RaedQuickServName2(Converter, object):
                                         tmpprov = self.getProviderName(self.ref)
                                 if ref:
                                         tmpprov = self.getProviderName(ref)
-                                else: 
+                                else:
                                         tmpprov = info.getInfoString(iServiceInformation.sProvider) or ''
                         if '' == tmpprov or 'Unknown' in tmpprov:
                                 if self.refstr:
@@ -514,7 +514,7 @@ class RaedQuickServName2(Converter, object):
                                                         tmpprov = line.split(':')[-1].strip('\r').strip('\n').strip()
                                                 #elif line.split()[0][i + 1:] in line:
                                                         #tmpprov = line.split(':')[-1].strip('\r').strip('\n').strip()
-                
+
                                 return tmpprov
                         return tmpprov
                 elif self.type == self.REFERENCE:
@@ -554,7 +554,7 @@ class RaedQuickServName2(Converter, object):
                         orbp = "%s" % (self.getTransponderInfo(info, ref, '%O'))
                         refer = "%s" % (ref and ref.toString() or info.getInfoString(iServiceInformation.sServiceref))
                         if isinstance(service, iPlayableServicePtr):
-                             prov = "%s" % (info.getInfoString(iServiceInformation.sProvider))   
+                             prov = "%s" % (info.getInfoString(iServiceInformation.sProvider))
                         else:
                              prov = "%s" % (ref and self.getProviderName(ref))
                         all = "%s,,,%s,,,%s" % (refer, prov, orbp)
@@ -601,7 +601,7 @@ class RaedQuickServName2(Converter, object):
                                                         tmpprov = self.getProviderName(self.ref)
                                                 if ref:
                                                         tmpprov = self.getProviderName(ref)
-                                                else: 
+                                                else:
                                                         tmpprov = info.getInfoString(iServiceInformation.sProvider) or ''
                                         if '' == tmpprov or 'Unknown' in tmpprov:
                                                 if self.refstr:
@@ -616,7 +616,7 @@ class RaedQuickServName2(Converter, object):
                                                                         i = len(line.split(':')[0])
                                                                         if tmpref in line or tmpref.strip()[:-15] in line:
                                                                                 tmpprov = line.split(':')[-1].strip('\r').strip('\n').strip()
-                                        ret += tmpprov  
+                                        ret += tmpprov
                                 elif f == 'R':  # %R - Reference
                                         if self.refstr:
                                                 ret += self.refstr
