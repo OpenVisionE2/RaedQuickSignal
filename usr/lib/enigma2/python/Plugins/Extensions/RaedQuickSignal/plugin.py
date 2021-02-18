@@ -269,7 +269,7 @@ class WeatherLocationChoiceList(Screen):
         def add_city(self):
                  self.session.openWithCallback(self.cityCallback, InputBox, title=_("Please enter a name of the city"), text="cityname", maxSize=False, visible_width=250)
 
-        def cityCallback(self,city=None):
+        def cityCallback(self, city=None):
                 try:
                         if os_path.exists('/tmp/weathermsn.xml'):
                                 os_remove('/tmp/weathermsn.xml')
@@ -465,7 +465,7 @@ class RaedQuickSignalScreen(Screen):
                 config.servicelist.startupservice.save()
                 self.close()
 
-        def setupback(self,answer=False):
+        def setupback(self, answer=False):
                 if answer:
                         self.exit()
                         
@@ -545,7 +545,7 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
                         i[1].cancel()
                 self.close(False)
                 
-        def restart(self,answer=None):
+        def restart(self, answer=None):
                 if answer:
                    self.session.open(TryQuitMainloop, 3)
                    return
