@@ -134,7 +134,7 @@ class RaedQuickSignalPiconUni(Renderer, Poll):
                                 self.picload.startDecode(pngname)
                                 self.pngname = pngname
 
-        def piconShow(self, picInfo = None):
+        def piconShow(self, picInfo=None):
                 ptr = self.picload.getData()
                 if ptr != None:
                         self.instance.setPixmap(ptr.__deref__())

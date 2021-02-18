@@ -76,7 +76,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 			"7B" : "DRE-Crypt",
 			"A1" : "Rosscrypt"}
 
-	def getServiceInfoString(self, info, what, convert = lambda x: "%d" % x):
+	def getServiceInfoString(self, info, what, convert=lambda x: "%d" % x):
 		v = info.getInfo(what)
 		if v == -1:
 			return "N/A"
@@ -84,7 +84,7 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 			return info.getInfoString(what)
 		return convert(v)
 		
-	def getServiceInfoString2(self, info, what, convert = lambda x: "%d" % x):
+	def getServiceInfoString2(self, info, what, convert=lambda x: "%d" % x):
 		v = info.getInfo(what)
 		if v == -3:
 			t_objs = info.getInfoObject(what)

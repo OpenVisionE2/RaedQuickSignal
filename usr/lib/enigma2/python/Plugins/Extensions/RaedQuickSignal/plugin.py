@@ -67,7 +67,7 @@ def trace_error():
     except:
         pass
 
-def logdata(label_name = '', data = None):
+def logdata(label_name='', data=None):
     try:
         data=str(data)
         fp = open('/tmp/RaedQuickSignal.log', 'a')
@@ -77,7 +77,7 @@ def logdata(label_name = '', data = None):
         trace_error()    
         pass
 
-def dellog(label_name = '', data = None):
+def dellog(label_name='', data=None):
     try:
         if os_path.exists('/tmp/RaedQuickSignal.log'):
                 os_remove('/tmp/RaedQuickSignal.log')
@@ -94,7 +94,7 @@ def isHD():
 ##############################################################################
 config.plugins.RaedQuickSignal = ConfigSubsection()
 config.plugins.RaedQuickSignal.enabled = ConfigYesNo(default=True)
-config.plugins.RaedQuickSignal.keyname = ConfigSelection(default = "KEY_TEXT", choices = [
+config.plugins.RaedQuickSignal.keyname = ConfigSelection(default="KEY_TEXT", choices=[
                 ("KEY_TEXT", "TEXT"),
                 ("KEY_TV", "TV"),
                 ("KEY_RADIO", "RADIO"),
@@ -113,7 +113,7 @@ config.plugins.RaedQuickSignal.keyname = ConfigSelection(default = "KEY_TEXT", c
                 ("KEY_F2", "f2"),
                 ("KEY_F3", "f3"),
                 ])
-config.plugins.RaedQuickSignal.style = ConfigSelection(default = "AGC1", choices = [
+config.plugins.RaedQuickSignal.style = ConfigSelection(default="AGC1", choices=[
                 ("AGC1", "AGC Progress + Picon"),
                 ("AGC2", "AGC Progress + Event Description"),
                 ("AGC3", "AGC Progress + Weather"),
@@ -122,11 +122,11 @@ config.plugins.RaedQuickSignal.style = ConfigSelection(default = "AGC1", choices
                 ("Event3", "Event Progress + Weather"),
                 ("Full", "Full Screen without any extra functions"),
                 ])
-config.plugins.RaedQuickSignal.enabledb = ConfigSelection(default = "Enable", choices = [
+config.plugins.RaedQuickSignal.enabledb = ConfigSelection(default="Enable", choices=[
                 ("Enable", "Enable show db value"),
                 ("Disable", "Disable show db value")
                 ])
-config.plugins.RaedQuickSignal.piconpath = ConfigSelection(default = "PLUGIN", choices = [
+config.plugins.RaedQuickSignal.piconpath = ConfigSelection(default="PLUGIN", choices=[
                 ("PLUGIN", "Set Picon Path from Plugin"),
                 ("MEDIA", "Set Picon Path from /media"),
                 ])
@@ -134,17 +134,17 @@ config.plugins.RaedQuickSignal.refreshInterval = ConfigNumber(default=30) #in mi
 ##############################################################################
 try:
         config.plugins.TSweather = ConfigSubsection()       
-        config.plugins.TSweather.city = ConfigText(default="manama", visible_width = 250, fixed_size = False)       
-        config.plugins.TSweather.windtype = ConfigSelection(default="ms", choices = [
+        config.plugins.TSweather.city = ConfigText(default="manama", visible_width=250, fixed_size=False)       
+        config.plugins.TSweather.windtype = ConfigSelection(default="ms", choices=[
                 ("ms", _("m/s")),
                 ("fts", _("ft/s")),
                 ("kmh", _("km/h")),
                 ("mph", _("mp/h")),
                 ("knots", _("knots"))])
-        config.plugins.TSweather.degreetype = ConfigSelection(default="C", choices = [
+        config.plugins.TSweather.degreetype = ConfigSelection(default="C", choices=[
                 ("C", _("Celsius")),
                 ("F", _("Fahrenheit"))])
-        config.plugins.TSweather.weather_location= ConfigText(default="bh-BH", visible_width = 250, fixed_size = False)       
+        config.plugins.TSweather.weather_location= ConfigText(default="bh-BH", visible_width=250, fixed_size=False)       
 except:
         trace_error()
         pass
@@ -267,7 +267,7 @@ class WeatherLocationChoiceList(Screen):
                        trace_error()
 
         def add_city(self):
-                 self.session.openWithCallback(self.cityCallback, InputBox, title=_("Please enter a name of the city"), text="cityname", maxSize=False, visible_width =250)
+                 self.session.openWithCallback(self.cityCallback, InputBox, title=_("Please enter a name of the city"), text="cityname", maxSize=False, visible_width=250)
 
         def cityCallback(self,city=None):
                 try:
@@ -594,7 +594,7 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
                 else:
                         self.close(False)
 ##############################################################################
-def sessionstart(reason, session = None, **kwargs):
+def sessionstart(reason, session=None, **kwargs):
         if reason == 0:
                 pSignal.gotSession(session)
 ##############################################################################
@@ -604,15 +604,15 @@ def main(session, **kwargs):
 def Plugins(**kwargs):
         result = [
                 PluginDescriptor(
-                        where = [PluginDescriptor.WHERE_SESSIONSTART],
-                        fnc = sessionstart
+                        where=[PluginDescriptor.WHERE_SESSIONSTART],
+                        fnc=sessionstart
                 ),
                 PluginDescriptor(
                         name=_("RaedQuickSignal Setup"),
-                        description = _("RAED's RaedQuickSignal setup"),
-                        where = PluginDescriptor.WHERE_PLUGINMENU,
-                        icon = 'RaedQuickSignal.png',
-                        fnc = main
+                        description=_("RAED's RaedQuickSignal setup"),
+                        where=PluginDescriptor.WHERE_PLUGINMENU,
+                        icon='RaedQuickSignal.png',
+                        fnc=main
                 ),
         ]
         return result

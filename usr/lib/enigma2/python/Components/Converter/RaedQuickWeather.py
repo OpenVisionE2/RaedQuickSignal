@@ -63,7 +63,7 @@ def trace_error():
     except:
         pass
 
-def logdata(label_name = '', data = None):
+def logdata(label_name='', data=None):
     try:
         data=str(data)
         fp = open('/tmp/RaedQuickSignal.log', 'a')
