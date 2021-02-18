@@ -8,6 +8,7 @@ from Components.config import config
 from Components.Converter.Poll import Poll
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
+
 class RaedQuickPiconWeather(Renderer, Poll):
     searchPaths = ('/usr/share/enigma2/%s/')
     searchPaths.append(resolveFilename(SCOPE_PLUGINS, 'Extensions/%s/'))
@@ -41,7 +42,6 @@ class RaedQuickPiconWeather(Renderer, Poll):
         self.poll_interval = 50
         self.poll_enabled = True
 
-        
         if self.instance:
             pngname = ''
             if what[0] != self.CHANGED_CLEAR:

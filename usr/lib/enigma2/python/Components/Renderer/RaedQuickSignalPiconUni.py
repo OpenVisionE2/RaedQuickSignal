@@ -58,6 +58,7 @@ except:
         #searchPaths.append(resolveFilename(SCOPE_CURRENT_SKIN, '%s/'))
         #searchPaths.append(resolveFilename(SCOPE_PLUGINS, '%s/'))
         
+
 class RaedQuickSignalPiconUni(Renderer, Poll):
         __module__ = __name__
         searchPaths = ('/data/%s/', '/usr/share/enigma2/%s/', '/usr/lib/enigma2/python/Plugins/Extensions/%s/', '/media/sde1/%s/', '/media/cf/%s/', '/media/sdd1/%s/', '/media/hdd/%s/', '/media/usb/%s/', '/media/ba/%s/', '/mnt/ba/%s/', '/media/sda/%s/', '/etc/%s/')

@@ -19,6 +19,7 @@ try:
 except:
 	pass
 
+
 class RaedQuickEcmInfo(Poll, Converter, object):
 	ecmfile = 0
 	emuname = 1

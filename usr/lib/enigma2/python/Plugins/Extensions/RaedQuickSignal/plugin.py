@@ -47,6 +47,7 @@ else:
 
 VER = "5.3"
 
+
 def removeunicode(data):
     try:
         try:
@@ -58,6 +59,7 @@ def removeunicode(data):
         pass
     return data
 
+
 def trace_error():
     import sys
     import traceback
@@ -66,6 +68,7 @@ def trace_error():
         traceback.print_exc(file=open('/tmp/RaedQuickSignal.log', 'a'))
     except:
         pass
+
 
 def logdata(label_name='', data=None):
     try:
@@ -77,6 +80,7 @@ def logdata(label_name='', data=None):
         trace_error()    
         pass
 
+
 def dellog(label_name='', data=None):
     try:
         if os_path.exists('/tmp/RaedQuickSignal.log'):
@@ -84,13 +88,17 @@ def dellog(label_name='', data=None):
     except:
         pass
 
+
 def getDesktopSize():
     s = getDesktop(0).size()
     return (s.width(), s.height())
 
+
 def isHD():
     desktopSize = getDesktopSize()
     return desktopSize[0] == 1280
+
+
 ##############################################################################
 config.plugins.RaedQuickSignal = ConfigSubsection()
 config.plugins.RaedQuickSignal.enabled = ConfigYesNo(default=True)
@@ -153,8 +161,10 @@ import gettext
 REDC = '\033[31m'
 ENDC = '\033[m'
 
+
 def cprint(text):
     print(REDC + "[RaedQuickSignal] " + text + ENDC)
+
 
 def downloadFile(url, filePath):
     try:
@@ -178,6 +188,7 @@ def downloadFile(url, filePath):
             cprint('Reason: %s' % e.reason)
     return False
 
+
 def readurl(url):
     try:
         req = compat_Request(url)
@@ -192,6 +203,7 @@ def readurl(url):
         elif hasattr(e, 'reason'):
             cprint('We failed to reach a server.')
             cprint('Reason: %s' % e.reason)
+
 
 def getcities(weather_location):
         url = (b"http://www.geonames.org/advanced-search.html?q=&country=%s&featureClass=P&continentCode=".decode("utf-8")) % str(weather_location.upper())
@@ -215,6 +227,7 @@ def getcities(weather_location):
                 return cities
         except Exception as error:
                 trace_error()
+
 
 class WeatherLocationChoiceList(Screen):
         def __init__(self, session, country):
@@ -311,6 +324,7 @@ class WeatherLocationChoiceList(Screen):
 
         def keyCancel(self):
                 self.close(None)
+
 
 class RaedQuickSignalScreen(Screen):
         def __init__(self, session):
@@ -472,6 +486,8 @@ class RaedQuickSignalScreen(Screen):
         def showsetup(self):
                 self.session.openWithCallback(self.setupback, RaedQuickSignal_setup)
 ##############################################################################
+
+
 class RaedQuickSignal():
         def __init__(self):
                 self.dialog = None
@@ -490,13 +506,18 @@ class RaedQuickSignal():
                         del globalActionMap.actions['showSherlock']
                 globalActionMap.actions['showRaedQuickSignal'] = self.ShowHide
 ##############################################################################
+
         def ShowHide(self):
                 if os_path.exists("/tmp/.qsignal") == False:
                         if config.plugins.RaedQuickSignal.enabled.value:
                                 self.session.open(RaedQuickSignalScreen)
+
+
 ##############################################################################
 pSignal = RaedQuickSignal()
 ##############################################################################
+
+
 class RaedQuickSignal_setup(ConfigListScreen, Screen):
         def __init__(self, session):
                 self.session = session
@@ -594,13 +615,19 @@ class RaedQuickSignal_setup(ConfigListScreen, Screen):
                 else:
                         self.close(False)
 ##############################################################################
+
+
 def sessionstart(reason, session=None, **kwargs):
         if reason == 0:
                 pSignal.gotSession(session)
 ##############################################################################
+
+
 def main(session, **kwargs):
         session.open(RaedQuickSignal_setup)
 ##############################################################################
+
+
 def Plugins(**kwargs):
         result = [
                 PluginDescriptor(

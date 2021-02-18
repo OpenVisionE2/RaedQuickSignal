@@ -38,6 +38,7 @@ try:
 except:
         correctChannelNumber = False
 
+
 class RaedQuickServName2(Converter, object):
         NAME = 0
         NUMBER = 1

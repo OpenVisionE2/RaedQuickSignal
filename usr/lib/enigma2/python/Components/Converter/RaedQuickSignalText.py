@@ -22,6 +22,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from time import localtime
 
+
 class RaedQuickSignalText(Converter, object):
 	SNRNUM = 0
 	AGCNUM = 1

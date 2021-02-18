@@ -54,6 +54,7 @@ degreetype = config.plugins.TSweather.degreetype.value
 windtype = config.plugins.TSweather.windtype.value
 weather_location = config.plugins.TSweather.weather_location.value
 
+
 def trace_error():
     import sys
     import traceback
@@ -62,6 +63,7 @@ def trace_error():
         traceback.print_exc(file=open('/tmp/RaedQuickSignal.log', 'a'))
     except:
         pass
+
 
 def logdata(label_name='', data=None):
     try:
@@ -73,11 +75,13 @@ def logdata(label_name='', data=None):
         trace_error()    
         pass
 
+
 if weather_location == 'en-EN':
 	weather_location = 'en-US'
 
 time_update = 30
 time_update_ms = 3000
+
 
 class RaedQuickWeather(Poll, Converter, object):
 
