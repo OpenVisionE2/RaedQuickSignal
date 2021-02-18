@@ -58,23 +58,23 @@ class RaedQuickEcmInfo(Poll, Converter, object):
 		     self.initTimer_conn = self.initTimer.timeout.connect(self.initBitrateCalc)
 		
 		self.systemTxtCaids = {
-			"26" : "BiSS",
-			"01" : "Seca Mediaguard",
-			"06" : "Irdeto",
-			"17" : "BetaCrypt",
-			"05" : "Viaccess",
-			"18" : "Nagravision",
-			"09" : "NDS-Videoguard",
-			"0B" : "Conax",
-			"0D" : "Cryptoworks",
-			"4A" : "DRE-Crypt",
-			"27" : "ExSet",
-			"0E" : "PowerVu",
-			"22" : "Codicrypt",
-			"07" : "DigiCipher",
-			"56" : "Verimatrix",
-			"7B" : "DRE-Crypt",
-			"A1" : "Rosscrypt"}
+			"26": "BiSS",
+			"01": "Seca Mediaguard",
+			"06": "Irdeto",
+			"17": "BetaCrypt",
+			"05": "Viaccess",
+			"18": "Nagravision",
+			"09": "NDS-Videoguard",
+			"0B": "Conax",
+			"0D": "Cryptoworks",
+			"4A": "DRE-Crypt",
+			"27": "ExSet",
+			"0E": "PowerVu",
+			"22": "Codicrypt",
+			"07": "DigiCipher",
+			"56": "Verimatrix",
+			"7B": "DRE-Crypt",
+			"A1": "Rosscrypt"}
 
 	def getServiceInfoString(self, info, what, convert=lambda x: "%d" % x):
 		v = info.getInfo(what)

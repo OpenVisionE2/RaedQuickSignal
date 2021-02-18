@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 pkg = 'Extensions.RaedQuickSignal'
-setup (name='enigma2-plugin-extensions-raedquicksignal',
+setup(name='enigma2-plugin-extensions-raedquicksignal',
        version='4.8',
        description='Plugin to show useful information in enigma2.',
        packages=[pkg],

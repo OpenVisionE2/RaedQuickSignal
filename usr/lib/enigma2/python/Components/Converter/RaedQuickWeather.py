@@ -67,7 +67,7 @@ def logdata(label_name='', data=None):
     try:
         data=str(data)
         fp = open('/tmp/RaedQuickSignal.log', 'a')
-        fp.write( str(label_name) + ': ' + data+"\n")
+        fp.write(str(label_name) + ': ' + data+"\n")
         fp.close()
     except:
         trace_error()    
