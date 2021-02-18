@@ -24,7 +24,8 @@
 import os
 import math
 import gettext
-import datetime, time
+import datetime
+import time
 from Tools.Directories import fileExists, pathExists
 from Components.Converter.Converter import Converter
 from Components.Element import cached
