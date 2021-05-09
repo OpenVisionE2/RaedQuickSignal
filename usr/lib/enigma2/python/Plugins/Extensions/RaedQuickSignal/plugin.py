@@ -22,7 +22,7 @@ from Components.Language import language
 from Components.MenuList import MenuList
 from enigma import eTimer, getDesktop
 from Screens.InputBox import InputBox
-from Components.ActionMap import readKeymap
+from Components.ActionMap import loadKeymap
 from Components.Label import Label
 from Screens.Screen import Screen
 from Tools.Directories import *
@@ -499,7 +499,7 @@ class RaedQuickSignal():
                         os_remove("/tmp/.qsignal")
                 keymap = resolveFilename(SCOPE_PLUGINS, "Extensions/RaedQuickSignal/keymap.xml")
                 global globalActionMap
-                readKeymap(keymap)
+                loadKeymap(keymap)
                 if 'displayHelp' in globalActionMap.actions:
                         del globalActionMap.actions['displayHelp']
                 elif 'showSherlock' in globalActionMap.actions:
