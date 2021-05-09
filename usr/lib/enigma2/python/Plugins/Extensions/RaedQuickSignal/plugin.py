@@ -22,7 +22,7 @@ from Components.Language import language
 from Components.MenuList import MenuList
 from enigma import eTimer, getDesktop
 from Screens.InputBox import InputBox
-from keymapparser import readKeymap
+from Components.ActionMap import readKeymap
 from Components.Label import Label
 from Screens.Screen import Screen
 from Tools.Directories import *
