@@ -8,7 +8,7 @@ from enigma import getDesktop, eServiceCenter, eServiceReference, iServiceInform
 from Tools.LoadPixmap import LoadPixmap
 from Components.Pixmap import Pixmap
 from Components.Renderer.Renderer import Renderer
-from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, resolveFilename
+from Tools.Directories import fileExists, SCOPE_GUISKIN, resolveFilename
 from Components.config import config
 from Components.Element import cached
 import os
@@ -171,11 +171,11 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                                 if (pngname == ''):
                                         pngname = self.findPicon('Fta')
                                         if (pngname == ''):
-                                            tmp = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
+                                            tmp = resolveFilename(SCOPE_GUISKIN, 'picon_default.png')
                                             if fileExists(tmp):
                                                     pngname = tmp
                                             else:
-                                                    pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/picon_default.png')
+                                                    pngname = resolveFilename(SCOPE_GUISKIN, 'skin_default/picon_default.png')
                                             self.nameCache['default'] = pngname
 
                         if (self.pngname != pngname):

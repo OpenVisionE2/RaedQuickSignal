@@ -36,7 +36,7 @@ from __future__ import print_function
 from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap, ePicLoad
 from Components.AVSwitch import AVSwitch
-from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS, resolveFilename
+from Tools.Directories import fileExists, SCOPE_GUISKIN, SCOPE_PLUGINS, resolveFilename
 import os
 
 try:
@@ -55,7 +55,7 @@ except:
         #               if '/dev/sd' in line:
         #                       piconPath = line.split()[1].replace('\\040', ' ') + '/%s/'
         #                       searchPaths.append(piconPath)
-        #searchPaths.append(resolveFilename(SCOPE_CURRENT_SKIN, '%s/'))
+        #searchPaths.append(resolveFilename(SCOPE_GUISKIN, '%s/'))
         #searchPaths.append(resolveFilename(SCOPE_PLUGINS, '%s/'))
 
 
@@ -113,11 +113,11 @@ class RaedQuickSignalPiconUni(Renderer, Poll):
                                 if pngname == '':
                                         pngname = self.findPicon('picon_default')
                                         if pngname == '':
-                                                tmp = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
+                                                tmp = resolveFilename(SCOPE_GUISKIN, 'picon_default.png')
                                                 if os.path.isfile(tmp):
                                                         pngname = tmp
                                                 else:
-                                                        pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/picon_default.png')
+                                                        pngname = resolveFilename(SCOPE_GUISKIN, 'skin_default/picon_default.png')
                                         self.nameCache['default'] = pngname
 
                         print("raedpngnameself.pngname", str(pngname), "**", self.pngname)
