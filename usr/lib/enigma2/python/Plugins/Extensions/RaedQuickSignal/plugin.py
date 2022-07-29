@@ -30,20 +30,11 @@ from Components.config import *
 from datetime import datetime
 from .screens.skin import *
 import re
-from six.moves.urllib.request import urlretrieve
 from os import path as os_path, remove as os_remove
-from sys import version_info
 from six.moves.urllib.request import urlretrieve
-if version_info[0] == 2:
-        # Python 2
-        from urllib2 import urlopen as compat_urlopen
-        from urllib2 import Request as compat_Request
-        from urllib2 import URLError as compat_URLError
-else:
-        # Python 3
-        from urllib.request import urlopen as compat_urlopen
-        from urllib.request import Request as compat_Request
-        from urllib.error import URLError as compat_URLError
+from six.moves.urllib.request import urlopen as compat_urlopen
+from six.moves.urllib.request import Request as compat_Request
+from six.moves.urllib.error import URLError as compat_URLError
 
 VER = "5.3"
 

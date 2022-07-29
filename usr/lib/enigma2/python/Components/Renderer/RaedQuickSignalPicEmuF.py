@@ -12,7 +12,6 @@ from Tools.Directories import fileExists, SCOPE_GUISKIN, resolveFilename
 from Components.config import config
 from Components.Element import cached
 import os
-from sys import version_info
 from Components.Converter.Poll import Poll
 
 

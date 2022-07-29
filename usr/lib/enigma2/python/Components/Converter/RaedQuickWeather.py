@@ -37,13 +37,13 @@ from datetime import date
 from os import environ
 from Components.Converter.Poll import Poll
 
-from sys import version_info
-PY3 = version_info[0] == 3
+from six import PY3
+
 if PY3:
-	import six
-	TMP176 = six.ensure_str(six.unichr(176))
-	TMP58 = six.ensure_str(six.unichr(58))
-	TMP37 = six.ensure_str(six.unichr(37))
+	from six import ensure_str
+	TMP176 = ensure_str(six.unichr(176))
+	TMP58 = ensure_str(six.unichr(58))
+	TMP37 = ensure_str(six.unichr(37))
 else:
 	TMP176 = unichr(176).encode("latin-1")
 	TMP58 = unichr(53).encode("latin-1")
