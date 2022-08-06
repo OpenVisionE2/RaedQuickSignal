@@ -1,9 +1,7 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #Coders by Nikolasi
 #EDit BY RAED To QuickSignal 2018
 
-from __future__ import print_function
 from enigma import getDesktop, eServiceCenter, eServiceReference, iServiceInformation, iPlayableService, eDVBFrontendParametersSatellite, eDVBFrontendParametersCable, ePixmap, eTimer
 from Tools.LoadPixmap import LoadPixmap
 from Components.Pixmap import Pixmap

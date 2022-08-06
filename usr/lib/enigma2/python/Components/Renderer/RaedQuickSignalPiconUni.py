@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 # PiconUni
 # Copyright (c) 2boom 2012-15
@@ -31,7 +30,6 @@
 # 17.08.2018 Update by mfraja to RAEDQuickSignal plugins
 # 07.12.2018 Update by mfraja to RAEDQuickSignal plugins fix picon show on DreamOS
 
-from __future__ import print_function
 
 from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap, ePicLoad

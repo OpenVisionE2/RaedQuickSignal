@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Converter - MSNWeatherAstro
 # Developer - Sirius

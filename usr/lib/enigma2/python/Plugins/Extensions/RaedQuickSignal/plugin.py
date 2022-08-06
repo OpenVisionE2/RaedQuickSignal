@@ -1,9 +1,7 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #RAEDQuickSignal (c) RAED 07-02-2014
 #Thank's mfaraj to help with some codes
 
-from __future__ import print_function
 
 from Components.ActionMap import ActionMap
 from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigSubsection, ConfigYesNo, configfile, NoSave

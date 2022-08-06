@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Created BY RAED 18-11-2019
 # Update By RAED 14-07-2020
 
