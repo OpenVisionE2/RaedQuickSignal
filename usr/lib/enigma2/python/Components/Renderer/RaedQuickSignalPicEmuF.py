@@ -6,7 +6,7 @@ from enigma import getDesktop, eServiceCenter, eServiceReference, iServiceInform
 from Tools.LoadPixmap import LoadPixmap
 from Components.Pixmap import Pixmap
 from Components.Renderer.Renderer import Renderer
-from Tools.Directories import fileExists, SCOPE_GUISKIN, resolveFilename
+from Tools.Directories import fileExists, SCOPE_GUISKIN, resolveFilename, isPluginInstalled
 from Components.config import config
 from Components.Element import cached
 import os
@@ -57,7 +57,7 @@ class RaedQuickSignalPicEmuF(Renderer, Poll):
                 if not info:
                         return ""
                 # Alternative SoftCam Manager
-                if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/AlternativeSoftCamManager/plugin.pyo"):
+                if isPluginInstalled("AlternativeSoftCamManager"):
                         if config.plugins.AltSoftcam.actcam.value != "none":
                                 return config.plugins.AltSoftcam.actcam.value
                         else:
