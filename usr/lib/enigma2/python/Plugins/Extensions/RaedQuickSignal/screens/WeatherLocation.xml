@@ -5,6 +5,6 @@
 			<eLabel position="350,675" size="290, 5" zPosition="-10" backgroundColor="green" />
 			<eLabel position="645,675" size="290, 5" zPosition="-10" backgroundColor="yellow" />
 			<eLabel position="940,675" size="290, 5" zPosition="-10" backgroundColor="blue" />
-			<widget name="key_red" position="70,635" size="260,25" zPosition="1" font="Regular;20" halign="left" foregroundColor="foreground" transparent="1" />
-			<widget name="key_green" position="365,635" size="260,25" zPosition="1" font="Regular;20" halign="left" foregroundColor="foreground" transparent="1" />
+			<widget name="key_red" position="70,635" size="260,25" zPosition="1" font="Regular;20" horizontalAlignment="left" foregroundColor="foreground" transparent="1" />
+			<widget name="key_green" position="365,635" size="260,25" zPosition="1" font="Regular;20" horizontalAlignment="left" foregroundColor="foreground" transparent="1" />
 		</screen>

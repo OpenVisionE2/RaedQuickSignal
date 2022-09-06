@@ -1,9 +1,9 @@
 <screen name="Event_Progress_Event_Des" position="210,130" size="800,470" title="Quick Signal Info" zPosition="1">
-  <widget source="session.FrontendStatus" render="Label" position="284,0" zPosition="2" size="200,35" font="Regular; 30" foregroundColor="#00bbbbbb" halign="center" valign="center" transparent="1">
+  <widget source="session.FrontendStatus" render="Label" position="284,0" zPosition="2" size="200,35" font="Regular; 30" foregroundColor="#00bbbbbb" horizontalAlignment="center" verticalAlignment="center" transparent="1">
     <convert type="FrontendInfo">SNRdB</convert>
   </widget>
   <!-- SNR -->
-  <eLabel name="snr" text="SNR:" position="0,45" size="80,35" font="Regular; 25" halign="center" foregroundColor="#00bbbbbb" transparent="1" />
+  <eLabel name="snr" text="SNR:" position="0,45" size="80,35" font="Regular; 25" horizontalAlignment="center" foregroundColor="#00bbbbbb" transparent="1" />
   <widget source="session.FrontendStatus" render="Progress" position="85,40" size="600,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_snr-scan.png" zPosition="2" borderWidth="4" borderColor="#656565">
     <convert type="FrontendInfo">SNR</convert>
   </widget>
@@ -14,7 +14,7 @@
   <widget source="session.Event_Now" render="Progress" position="85,105" size="600,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/images/progress.png" zPosition="2" borderWidth="4" borderColor="#656565" >
     <convert type="EventTime">Progress</convert>
   </widget>
-  <widget source="session.Event_Now" render="Label" position="88,105" size="600,50" font="Regular;30" valign="center"  backgroundColor="#000000" transparent="1" zPosition="3">
+  <widget source="session.Event_Now" render="Label" position="88,105" size="600,50" font="Regular;30" verticalAlignment="center"  backgroundColor="#000000" transparent="1" zPosition="3">
     <convert type="EventName">Name</convert>
   </widget>
   <eLabel position="85,160" size="600,2" backgroundColor="#00bbbbbb" zPosition="4" />
@@ -22,19 +22,19 @@
   <eLabel position="85,337" size="600,2" backgroundColor="#00bbbbbb" zPosition="4" />
   <eLabel position="85,368" size="600,2" backgroundColor="#00bbbbbb" zPosition="4" />
   <eLabel position="85,397" size="600,2" backgroundColor="#00bbbbbb" zPosition="4" />
-  <widget source="session.CurrentService" render="Label" position="85,163" size="600,150" font="Regular; 20" zPosition="2" backgroundColor="background" foregroundColor="#41ff9900" transparent="1" valign="top" noWrap="1" halign="center">
+  <widget source="session.CurrentService" render="Label" position="85,163" size="600,150" font="Regular; 20" zPosition="2" backgroundColor="background" foregroundColor="#41ff9900" transparent="1" verticalAlignment="top" noWrap="1" horizontalAlignment="center">
     <convert type="RaedQuickEcmInfo">ecmfile</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="85,311" size="600,25" font="Regular; 20" zPosition="2" backgroundColor="background" foregroundColor="#00bbbbbb" transparent="1" valign="top" halign="center">
+  <widget source="session.CurrentService" render="Label" position="85,311" size="600,25" font="Regular; 20" zPosition="2" backgroundColor="background" foregroundColor="#00bbbbbb" transparent="1" verticalAlignment="top" horizontalAlignment="center">
     <convert type="RaedQuickEcmInfo">caids</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="656,311" size="80,25" font="Regular; 22" zPosition="3" backgroundColor="background" foregroundColor="#fec000" transparent="1" valign="top" halign="center">
+  <widget source="session.CurrentService" render="Label" position="656,311" size="80,25" font="Regular; 22" zPosition="3" backgroundColor="background" foregroundColor="#fec000" transparent="1" verticalAlignment="top" horizontalAlignment="center">
     <convert type="RaedQuickEcmInfo">activecaid</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="85,340" size="600,25" font="Regular; 20" zPosition="2" backgroundColor="background" foregroundColor="#41ff9900" transparent="1" valign="top" halign="center">
+  <widget source="session.CurrentService" render="Label" position="85,340" size="600,25" font="Regular; 20" zPosition="2" backgroundColor="background" foregroundColor="#41ff9900" transparent="1" verticalAlignment="top" horizontalAlignment="center">
     <convert type="RaedQuickEcmInfo">pids</convert>
   </widget>
-  <!--widget source="session.CurrentService" render="Label" position="85,373" size="600,25" font="Regular; 20" zPosition="2" backgroundColor="background" foregroundColor="#00bbbbbb" transparent="1" valign="top" halign="center">
+  <!--widget source="session.CurrentService" render="Label" position="85,373" size="600,25" font="Regular; 20" zPosition="2" backgroundColor="background" foregroundColor="#00bbbbbb" transparent="1" verticalAlignment="top" horizontalAlignment="center">
     <convert type="RaedQuickEcmInfo">bitrate</convert>
   </widget-->
   <widget source="session.FrontendStatus" render="Pixmap" position="60,188" size="4,60" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/icons_quick/icon_ber-scan_on.png" transparent="1">
@@ -184,24 +184,24 @@
   </widget>
   <ePixmap position = "740,340" size = "45,30" zPosition = "4" alphatest = "blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RaedQuickSignal/images/menu.png" />
   <!-- Event Description -->
-  <widget source="session.Event_Now" render="Label" position="185,403" size="410,65" font="Regular; 18" halign="center" foregroundColor="#00bbbbbb" backgroundColor="background" transparent="1">
+  <widget source="session.Event_Now" render="Label" position="185,403" size="410,65" font="Regular; 18" horizontalAlignment="center" foregroundColor="#00bbbbbb" backgroundColor="background" transparent="1">
       <convert type="EventName">ExtendedDescription</convert>
   </widget>
   <!-- Channel and mumber and Provider -->
-  <widget source="session.CurrentService" render="Label" position="0,400" size="180,22" font="Regular; 18" backgroundColor="background" foregroundColor="#0000ff00" transparent="1" halign="center">
+  <widget source="session.CurrentService" render="Label" position="0,400" size="180,22" font="Regular; 18" backgroundColor="background" foregroundColor="#0000ff00" transparent="1" horizontalAlignment="center">
     <convert type="RaedQuickServName2">Number</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="0,420" size="180,22" font="Regular; 16" backgroundColor="background" foregroundColor="#ff0000" transparent="1" halign="center">
+  <widget source="session.CurrentService" render="Label" position="0,420" size="180,22" font="Regular; 16" backgroundColor="background" foregroundColor="#ff0000" transparent="1" horizontalAlignment="center">
     <convert type="RaedQuickServName2">Name</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="0,443" size="180,22" font="Regular; 16" backgroundColor="background" foregroundColor="#00bbbbbb" transparent="1" halign="center">
+  <widget source="session.CurrentService" render="Label" position="0,443" size="180,22" font="Regular; 16" backgroundColor="background" foregroundColor="#00bbbbbb" transparent="1" horizontalAlignment="center">
     <convert type="RaedQuickServName2">Provider</convert>
   </widget>
   <!-- Tuner Info  -->
-  <widget source="session.CurrentService" render="Label" position="599,403" size="200,25" font="Regular; 20" halign="center" backgroundColor="background" foregroundColor="#fec000" transparent="1">
+  <widget source="session.CurrentService" render="Label" position="599,403" size="200,25" font="Regular; 20" horizontalAlignment="center" backgroundColor="background" foregroundColor="#fec000" transparent="1">
     <convert type="RaedQuickServName2">%F %p %Y %f %M %s</convert>
   </widget>
-  <widget source="session.CurrentService" render="Label" position="599,435" size="200,23" font="Regular; 18" halign="center" backgroundColor="background" foregroundColor="#00bbbbbb" transparent="1">
+  <widget source="session.CurrentService" render="Label" position="599,435" size="200,23" font="Regular; 18" horizontalAlignment="center" backgroundColor="background" foregroundColor="#00bbbbbb" transparent="1">
     <convert type="RaedQuickServName2">%c %l %h %m %g %b %e %S</convert>
   </widget>
  </screen>
